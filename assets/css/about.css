@@ -303,7 +303,7 @@ nav ul li a::after {
     bottom: -5px;
     width: 0%;
     height: 3px;
-    background-color: #ffcc00; /* Màu gạch chân */
+    background-color: black; /* Màu gạch chân */
     transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 }
 
