@@ -9,36 +9,46 @@
             margin: 0;
             padding: 0%;
         }
-    .header1 {
-        font-size: small;
-        background-color: #D81324;
-        padding: 5px 20px; /* Thêm padding ngang */
-        color: white;
-        font-family: Arial, Helvetica, sans-serif;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .header1_part1, .header1_part2 {
-        display: flex;
-        flex-direction: row;
-        align-items: center; 
-        gap: 10px; /* Tăng khoảng cách giữa các phần tử */
-    }
-    .header1_part1 p, .header1_part2 p {
-        margin: 0; /* Xóa margin mặc định của thẻ <p> */
-    }
-    .header1 img {
-        width: 15px; /* Điều chỉnh kích thước icon */
-        height: auto;
-    }
+        body {
+    margin: 0;
+    padding: 0;
+}
 
+.header1 {
+    font-size: small;
+    background-color: #D81324;
+    padding: 5px 20px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap; /* Đảm bảo không bị xuống dòng */
+    width: 100%;
+}
+
+.header1_part1, .header1_part2 {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Tăng khoảng cách giữa các phần tử */
+    white-space: nowrap; /* Ngăn chữ bị xuống dòng */
+}
+
+.header1 img {
+    width: 15px;
+    height: auto;
+    flex-shrink: 0; /* Ngăn icon bị thu nhỏ */
+}
+
+.header1_part1 p, .header1_part2 p {
+    margin: 0;
+    font-size: 14px; /* Giữ chữ không quá lớn */
+}
 
     </style>
 </head>
 <body>
-    <div class="header1">
+    <div class="header1 d-none d-sm-block" >
         <div class="header1_part1">
             <img src="../assets/images/location-dot-solid.svg" alt="">
             <p>123 Street A</p>

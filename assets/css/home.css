@@ -1,0 +1,187 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+.home_page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Căn giữa toàn bộ nội dung */
+}
+@media (max-width: 991px) {
+    .container_home {
+        width: 80%;
+    }
+}
+@media (min-width: 992px) {
+    .container_home {
+        width: 70%;
+    }
+}
+.carousel-item img {
+    max-height: 450px;
+    object-fit: cover;
+    justify-self: center;
+}
+
+.about_us{
+    text-align: center;
+    font-weight: bolder;
+    margin-top: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    letter-spacing: 10px;
+    font-family: 'Oswald', sans-serif;
+    color: #D81324;
+}
+.about-us-section-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: justify;
+}
+.about-us-section-content button {
+    background-color: #D81324; /* Màu đỏ */
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Tăng khoảng cách */
+    width: 120px; /* Tăng chiều rộng */
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    margin: 10px auto;
+}
+.about-us-section-content a {
+    text-decoration: none;
+    color: white;
+}
+/* Khi rê chuột vào */
+.about-us-section-content button:hover {
+    background-color: #A50E1A; /* Màu đỏ đậm hơn */
+    transform: scale(1.05); /* Hiệu ứng phóng to nhẹ */
+}
+
+@media (max-width: 768px) {
+    .about-us-section-content.d-block.d-md-none img {
+        height: 150px; /* Giảm chiều cao ảnh */
+        object-fit: cover; /* Giữ tỷ lệ và cắt ảnh nếu cần */
+        
+    }
+}
+@media (min-width: 768px) {
+    .about-us-section-content .image,
+    .about-us-section-content .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .about-us-section-content .row {
+        height: 100%;
+    }
+}
+@media (min-width: 992px) {
+    .about-us-section-content .image img {
+        max-height: 350px; /* Giới hạn chiều cao ảnh */
+        object-fit: cover; /* Đảm bảo ảnh giữ tỷ lệ */
+    }
+}
+span {
+    color: #D81324; /* Màu đỏ */
+    font-weight: bolder;
+}
+.about-us-section-content {
+    margin-bottom: 20px;
+}
+.background-consult-form {
+    background-image: url('../images/background_consult_form.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.consult-form {
+    background: rgba(216, 19, 36, 0.8); /* Màu đỏ trong suốt */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.consult-form h2 {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-family: 'Oswald', sans-serif;
+}
+.consult-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+}
+.double-row {
+    display: flex;
+    gap: 10px;
+}
+.submit-btn {
+    background: blue;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.submit-btn:hover {
+    background: darkblue;
+}
+/* Video Section */
+.video_section {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.video_section h3{
+    font-family: 'Oswald', sans-serif;
+    color: #D81324;
+    text-align: center;
+}
+
+@media (min-width: 992px) {
+    .video_section{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+    .video_col{
+        width: 50%;
+    }
+    .video_content {
+        width: 47%;
+    }
+    .video_col video {
+        width: 100%;
+    }
+}
+@media (max-width: 991px) {
+    .video_section{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .video_col{
+        width: 80%;
+        margin: 0 auto;
+    }
+    .video_col video {
+        width: 100%;
+    }
+}

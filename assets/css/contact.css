@@ -1,0 +1,136 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    flex-grow: 1;
+    width: 80%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Căn giữa toàn bộ nội dung */
+}
+
+/* Banner */
+.banner {
+    width: 100%;
+    position: relative; /* Để tiêu đề hiển thị đúng vị trí */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner h1 {
+    position: absolute;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    letter-spacing: 20px;
+    font-size: 5rem;
+    text-align: center;
+}
+
+.banner img {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+@media (max-width: 576px) {
+    .banner h1 {
+        letter-spacing: 10px;
+        font-size: 3rem;
+    }
+    .banner img {
+        width: 100%;
+        height: 30vh;
+        object-fit: cover;
+        filter: brightness(0.6);
+    }
+}
+
+/* INFORMATION */
+.information {
+    text-align: center;
+    font-size: 2rem;
+    margin: 20px 0;
+    font-family: 'Oswald', sans-serif;
+    color: #D81324;
+}
+
+/* Info Section */
+.info {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.info h3{
+    font-family: 'Oswald', sans-serif;
+    color: #D81324;
+    margin: 0;
+    padding: 0;
+}
+.info p {
+    font-family: 'Times New Roman', Times, serif;
+}
+.info img {
+    width: 1.5rem;
+    padding: 0px;
+    margin: 0px;
+}
+.info .image {
+    padding-top: 10%;
+}
+.phone_contact, .email, .time {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: flex-start;
+    align-self: start;
+}
+/* Address Section */
+.address {
+    display: grid;
+    grid-template-areas: 
+        "address_title address_title"
+        "add1 add2";
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.address img {
+    width: 1.5rem;
+}
+
+.address_title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    grid-area: address_title;
+    font-size: 1.5rem;
+    font-family: 'Oswald', sans-serif;
+    color: #D81324;
+}
+
+.add1, .add2 {
+    padding: 10px;
+    background: #f8f8f8;
+    border-radius: 10px;
+}
+
+.address iframe {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+}
+@media (max-width: 991px){
+    .address {
+        display: flex;
+        flex-direction: column;
+    }
+}

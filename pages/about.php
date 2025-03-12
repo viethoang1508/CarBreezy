@@ -1,110 +1,100 @@
 <?php  
     require('../includes/header.php');
-    require('../includes/header2.php');
 ?>
 
-<!-- Car Banner Section - Full Width (DÙNG BOOTSTRAP) -->
-<div class="container-fluid px-0 position-relative">
-    <img src="../assets/images/honda-civic-1-9932-17131664376171739260029-1713342786612-1713342786802744576194.webp" 
-         alt="Car Banner" 
-         class="img-fluid w-100 car-banner-img">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/css/about.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <!-- Overlay Black Background -->
-    <div class="banner-overlay position-absolute top-0 start-0 w-100 h-100"></div>
-
-    <!-- Text Content -->
-    <div class="banner-text-overlay position-absolute top-50 start-50 translate-middle text-center">
-        <h1 class="display-3 fw-bold text-white banner-title">ABOUT</h1>
-        <div class="banner-underline mx-auto"></div>
-    </div>
-</div>
-
-<!-- About Section Content -->
-<div class="container-fluid py-5 mt-5 px-5">
-    <div class="row align-items-start about-content-section g-4">
-        <div class="col-lg-8">
-            <h2 class="text-uppercase fw-bold text-secondary mb-2" style="font-size: 3rem;">WELCOME TO</h2>
-            <h1 class="text-danger fw-bold display-1 mb-4" style="font-size: 6rem;">CarBreezy</h1>
-            <p class="mb-4 fw-bold fs-3">CarBreezy is transforming the way people buy and sell cars. As a leading automotive digital marketplace, we make car buying easy, transparent, and efficient. Whether you're searching for your dream car or selling your current one, we provide the tools and insights to help you make confident decisions.</p>
-            <p class="mb-4 fw-bold fs-3">With a vast selection from trusted dealers, CarBreezy simplifies the process from search to purchase. Our online platform lets you explore, compare, and even complete your purchase from home, giving you flexibility and control.</p>
-            <p class="fw-bold fs-3">Built on trust and transparency, CarBreezy offers clear pricing, unbiased research, and an innovative digital experience. Your car-buying journey is in your hands—and we’re here to support you every step of the way.</p>
+</head>
+<body>
+    <div class="about">
+        <div class="banner1">
+            <img src="../assets/images/honda-civic-1-9932-17131664376171739260029-1713342786612-1713342786802744576194.webp" alt="">
+                <div class="content">
+                    <h1>ABOUT</h1>
+                    <p>Bringing You the Best Cars with Passion & Innovation!</p>
+                </div>
         </div>
-        <div class="col-lg-4 d-flex justify-content-center">
-            <img src="../assets/images/image 22.jpg" alt="Car Image" class="img-fluid rounded shadow w-75">
+        <div class="banner2">
+            <h2>WELCOME TO</h2>
+            <h1>CARBREEZY</h1>
+        </div>
+        <div class="container">
+
+            <!-- Our Story -->
+            <div class="about_part2">
+                <div class="content">
+                    <h2>Our Story – The CarBreezy Journey 🚗</h2>
+                    <p>
+                        At CarBreezy, we believe buying a car should be simple, exciting, and hassle-free. Founded with a vision to redefine the car-buying experience, we focus on transparency, quality, and convenience.
+                        <br>
+                        Our journey began with a mission to eliminate hidden costs and complicated processes. Today, we are a trusted name, offering carefully selected vehicles and exceptional service to thousands of happy customers.
+                        <br>
+                        As the industry evolves, we continue to innovate, ensuring you find the perfect car with ease. Experience the CarBreezy difference—where your dream car is just a drive away! 🚀
+                    </p>
+                </div>
+                <div class="image">
+                    <img class="d-block d-sm-none"src="../assets/images/about_our_story.jpg" alt="">
+                    <img class="d-none d-sm-block d-lg-none" src="../assets/images/about_our_story_03.jpg">
+                    <img id="img_part2_lg"class="d-none d-lg-block" src="../assets/images/about_our_story_02.jpg">
+                </div>
+            </div>
+
+            <!-- Our Vision & Mission -->
+            <div class="about_part3">
+                <div class="vision">
+                    <h2>Our Vision</h2>
+                    <p>At CarBreezy, we strive to become a leading name in the automotive industry by making car buying and selling simple, transparent, and customer-centric. We envision a future where everyone can own their dream car without stress or uncertainty.</p>
+                </div>
+                <div class="mission">
+                    <h2>
+                        Our Mission
+                    </h2>
+                    <ul>
+                        <li><strong>Customer First</strong> – Provide a seamless and enjoyable car-buying experience.</li>
+                        <li><strong>Quality & Trust</strong> – Offer only high-quality, thoroughly inspected vehicles.</li>
+                        <li><strong>Innovation & Convinience</strong> – Leverage technology to simplify the process.</li>
+                        <li><strong>Sustainability</strong> – Promote eco-friendly practices for a greener future.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Our Number -->
+            <h2 class="numbers_h2">Our Numbers Speak for Themselves 🚀</h2>
+            <div class="numbers">
+                <div class="col1">
+                    <h1>2</h1>
+                    <h3>Locations</h3>
+                    <p>Serving customers across multiple cities with state-of-the-art showrooms.</p>
+                </div>
+                <div class="col2">
+                    <h1>50,000+</h1>
+                    <h3>Happy Customers</h3>
+                    <p>Trusted by thousands for a seamless car-buying experience.</p>
+                </div>
+                <div class="col3">
+                    <h1>20,000+</h1>
+                    <h3>Cars Sold</h3>
+                    <p>Delivering high-quality vehicles to satisfied owners.</p>
+                </div>
+                <div class="col4">
+                    <h1>98%</h1>
+                    <h3>Customer Satisfaction</h3>
+                    <p>Proven excellence with top-rated service and support.</p>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
-<!-- Additional Image Section with Text Overlays -->
-<div class="container-fluid py-4 px-5">
-    <div class="position-relative">
-        <img src="../assets/images/pngtree-dark-suv-expeditionary-ride-standing-alone-on-a-black-backdrop-in-picture-image_5811853.jpg" alt="Car Image" class="img-fluid w-100 rounded shadow">
-        <div class="position-absolute top-0 start-0 w-100 h-100 text-white d-flex flex-column justify-content-center align-items-center px-4 text-center" style="background-color: rgba(0,0,0,0.5);">
-            <div class="mb-4">
-                <h3 class="fw-bold">2018 – The Idea Was Born</h3>
-                <p>Seeing the challenges in car buying and selling, a team of automotive and tech enthusiasts united to create a more transparent experience.</p>
-            </div>
-            <div class="mb-4">
-                <h3 class="fw-bold">2019 – CarBreezy Officially Launched</h3>
-                <p>After months of development, CarBreezy launched as an online platform to streamline car searches and enhance pricing transparency.</p>
-            </div>
-            <div class="mb-4">
-                <h3 class="fw-bold">2020 – Expansion and Dealer Partnerships</h3>
-                <p>We grew our dealer network nationwide, offering more vehicle choices and new research tools for easy model, price, and feature comparisons.</p>
-            </div>
-            <div>
-                <h3 class="fw-bold">2024 – Looking to the Future</h3>
-                <p>CarBreezy continues to innovate, expanding services, enhancing digital financing, and improving the customer experience—all to make car buying and selling easier than ever.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<style>
-.car-banner-img {
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-    object-position: center;
-}
-
-.banner-overlay {
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-    position: absolute;
-}
-
-.banner-text-overlay {
-    z-index: 2;
-}
-
-.banner-title {
-    letter-spacing: 10px;
-    margin-bottom: 10px;
-}
-
-.banner-underline {
-    width: 80px;
-    height: 3px;
-
-}
-
-.about-content-section {
-    margin-top: 0 !important;
-}
-
-@media (max-width: 768px) {
-    .car-banner-img {
-        height: 300px;
-    }
-    .banner-title {
-        font-size: 2rem;
-    }
-    .banner-underline {
-        width: 50px;
-    }
-}
-</style>
+</body>
+</html>
 
 <?php 
     require('../includes/footer.php');

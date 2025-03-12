@@ -1,0 +1,268 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+/* Width container */
+@media (min-width: 992px){
+    .about .container{
+        width: 60%;
+    }
+}
+@media (max-width: 991px){
+    .about .container{
+        width: 80%;
+    }
+}
+.about .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center ;
+}
+/* Phần Banner */
+.about .banner1 {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+.about .banner1 img {
+    width: 100%;
+    height: 100%;
+    filter: brightness(0.5);
+    position: absolute;
+    z-index: 0;
+    object-fit: cover;
+}
+.about .banner1 h1 {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    letter-spacing: 20px;
+    font-size: 5rem;
+    text-align: center;
+}
+@media (max-width: 576px){
+    .about .banner1 h1{
+        letter-spacing: 10px;
+        font-size: 3rem;
+    }
+}
+.about .banner1 p {
+    color: white;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+}
+.about .banner1 .content {
+    position: relative;
+    z-index: 1;
+    height: fit-content;
+}
+
+/* Welcome */
+.about .banner2 {
+    padding-top: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+.about .banner2 h2 {
+    color: darkgray;
+    font-family: 'Oswald', sans-serif;
+}
+.about .banner2 h1 {
+    font-family: 'Times New Roman', Times, serif;
+    color: #D81324;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+/* Our Story */
+.about .about_part2 {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.about .about_part2 h2 {
+    font-family: 'Oswald', sans-serif;
+    color: #D81324;
+}
+.about .about_part2 p {
+    text-align: justify;
+}
+@media (min-width: 577px) and (max-width: 991px){
+    .about .banner1{
+        height: 40vh;
+    }
+}
+@media (min-width: 992px){
+    .about .banner1{
+        height: 80vh;
+    }
+}
+@media (max-width: 576px){
+    .about .banner1{
+        height: 30vh;
+    }
+    .about .banner1 p {
+        width: 70%;
+        margin: 0 auto;
+    }
+    .about .about_part2 img {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+/* Our Story */
+@media (min-width: 576px){
+    .about .about_part2{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+    .about .about_part2 img {
+        width: 100%;
+    }
+    .about .about_part2 .image {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        justify-content: center;
+    }
+    #img_part2_lg {
+        width: 80%;
+    }
+}
+
+/* Vision and Mission */
+.about .about_part3{
+    font-family: 'Times New Roman', Times, serif; 
+    margin-top: 20px;
+}
+.about .about_part3 h2 {
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    color: #D81324;
+}
+.about .about_part3 p, .about_part3 li{
+    text-align: justify;
+    padding: 0;
+    margin: 0;
+}
+.about .vision, .about .mission{
+    background-color: rgb(248, 248, 248);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+}
+.vision, .mission {
+    transition: transform 0.3s ease-in-out; /* Hiệu ứng mượt mà */
+}
+
+.vision:hover, .mission:hover {
+    transform: scale(1.05); /* Phóng to 5% khi di chuột vào */
+}
+@media (max-width: 576px){
+    .about .about_part3{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .about .vision, .about .mission{
+        width: 100%;
+    }
+}
+@media (min-width: 577px){
+    .about .about_part3{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+    .about .vision, .about .mission{
+        width: 47%;
+    }
+}
+/* Our Number */
+.about .numbers {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 20px;
+}
+.about .numbers h1 {
+    font-family: 'Oswald', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.numbers_h2 {
+    font-family: 'Oswald', sans-serif;
+    color: #D81324;
+    margin-top: 20px;
+}
+.col1, .col2, .col3, .col4 {
+    transition: transform 0.3s ease-in-out; /* Hiệu ứng mượt mà */
+}
+
+.col1:hover, .col2:hover, .col3:hover, .col4:hover {
+    transform: scale(1.05); /* Phóng to 5% khi di chuột vào */
+}
+.col1, .col2, .col3, .col4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+@media (min-width: 992px) {
+    .about .numbers{
+        background-image: url(../images/about_number_lg.jpg);
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        color: white;
+        padding: 20px 10px;
+        /* gap: 10px; */
+        width: 100%;
+    }
+    .col1, .col2, .col3, .col4 {
+        width: 24%;
+    }
+
+}
+@media (min-width: 577px) and (max-width: 991px){
+    .about .numbers{
+        background-image: url(../images/about_number_ipad.jpg);
+        background-position: center;
+        background-size: cover;
+        display: grid;
+        grid-template-areas: 
+        "col1 col2"
+        "col3 col4";
+        color: white;
+        gap: 10px;
+        width: 100%;
+        padding: 20px;
+    }
+}
+@media (max-width: 576px){
+    .about .numbers{
+        background-image: url(../images/about_number_ip.jpg);
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        color: white;
+        padding: 20px 10px;
+        /* gap: 10px; */
+        width: 100%;
+    }
+    .numbers_h2 {
+        text-align: center;
+    }
+}
