@@ -1,0 +1,19 @@
+.body {
+    margin: 0;
+    padding: 0;
+}
+@media (max-width: 575.98px) {
+    .container{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+@media (min-width: 576px) {
+    .container{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+}
+

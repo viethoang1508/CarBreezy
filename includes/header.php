@@ -70,7 +70,7 @@
                             <a class="nav-link <?php if ($current_page == 'about.php') echo 'active'; ?>" href="../pages/about.php">ABOUT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if ($current_page == 'cars.php') echo 'active'; ?>" href="../pages/car.php">CARS</a>
+                            <a class="nav-link <?php if ($current_page == 'car.php') echo 'active'; ?>" href="../pages/car.php">CARS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link <?php if ($current_page == 'contact.php') echo 'active'; ?>" href="../pages/contact.php">CONTACT</a>

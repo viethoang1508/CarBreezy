@@ -1,3 +1,17 @@
+<?php
+    require ('../includes/connect.php');
+
+    // Lấy danh sách xe từ database
+    $query = "SELECT brands.name AS brand_name, products.name AS car_name, products.price, products.type, products.status, products.image 
+    FROM products 
+    JOIN brands ON products.brand_id = brands.id";
+    $result = $mysqli->query($query);
+
+    $cars = [];
+    while ($row = $result->fetch_assoc()) {
+    $cars[] = $row;
+    }
+?>
 <?php 
     require('../includes/header.php');
 ?>
@@ -11,7 +25,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../assets/css/home.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
-
+    <style>
+        
+    </style>
     
 </head>
 <body>
@@ -61,7 +77,7 @@
                     </h3>
                     <p>Your car buying destiny is in your hands, but we will help you every step of the way. We built this site to make car buying as fast and easy as possible.</p>
                     <p>From discovery to delivery, consumers can use CarBreezy to explore vehicles from an expansive, cross-brand selection of inventory from our vast network ...</p>
-                    <button><a href="">See more</a></button>
+                    <button><a href="../pages/about.php">See more</a></button>
                     </div>
                 </div>
             </div>
@@ -86,7 +102,44 @@
             </div>
             <!-- Hiển thị xe -->
             <h2 class="about_us">CARS</h2>
+            <div class="slider">
+                <span class="arrow" onclick="prevSlide()">&#9665;</span>
+                <div class="car-container">
+                    <div class="car-wrapper" id="car-wrapper">
+                        <?php foreach ($cars as $car) : ?>
+                            <div class="car">
+                                <p><strong><?= $car['status'] ?></strong> | <strong><?= $car['type'] ?></strong></p>
+                                <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['car_name'] ?>">
+                                <h3><?= $car['car_name'] ?></h3>
+                                <p><strong>Hãng:</strong> <span class="car_brand_name"><?= $car['brand_name'] ?></span></p>
+                                <p class="price"><?= number_format($car['price'], 0, ',', '.') ?> VNĐ</p>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <span class="arrow" onclick="nextSlide()">&#9655;</span>
+            </div>
+            <script>
+                let index = 0;
+                const carWrapper = document.getElementById("car-wrapper");
+                const carWidth = 260; // 250px + margin
+                const totalCars = document.querySelectorAll(".car").length;
+                const maxIndex = totalCars - 3; // Hiển thị 3 xe mỗi lần
 
+                function updateSlide() {
+                    carWrapper.style.transform = `translateX(${-index * carWidth}px)`;
+                }
+
+                function nextSlide() {
+                    if (index < maxIndex) index++;
+                    updateSlide();
+                }
+
+                function prevSlide() {
+                    if (index > 0) index--;
+                    updateSlide();
+                }
+            </script>
             <!-- Video -->
             <div class="video_section">
                 <div class="video_content">
@@ -109,6 +162,7 @@
         </div>
     </div>
 </body>
+
 </html>
 <?php 
     require('../includes/footer.php');
