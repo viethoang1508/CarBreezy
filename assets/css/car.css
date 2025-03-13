@@ -134,4 +134,50 @@ h3 {
     font-weight: bold;
     color: #d41a2a;
 }
+/* Thiết lập mặc định cho menu */
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white; /* Màu chữ mặc định */
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    position: relative; /* Để tạo hiệu ứng gạch chân */
+}
+
+/* Khi hover vào */
+nav ul li a:hover {
+    color: #ffcc00; /* Đổi màu chữ */
+    text-shadow: 2px 2px 5px rgba(255, 204, 0, 0.8); /* Đổ bóng */
+}
+
+/* Hiệu ứng gạch chân khi hover */
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0%;
+    height: 3px;
+    background-color: black; /* Màu gạch chân */
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+/* Khi hover vào thì gạch chân xuất hiện */
+nav ul li a:hover::after {
+    width: 100%;
+    left: 0;
+}
 

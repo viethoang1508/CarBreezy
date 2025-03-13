@@ -63,7 +63,7 @@ foreach ($types as $type) {
                 <div class="car-list">
                     <?php foreach ($list as $car): ?>
                         <div class="car-item">
-                            <img src="../assets/images/<?= $car['image'] ?>" alt="<?= $car['name'] ?>">
+                            <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['name'] ?>">
                             <p><?= $car['name'] ?></p>
                             <p><?= number_format($car['price'], 0, ',', '.') ?> vnđ</p>
                         </div>

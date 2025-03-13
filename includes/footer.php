@@ -12,27 +12,27 @@
     .footer {
     background-color: #222; /* Màu nền tối hơn để tăng độ tương phản */
     color: white;
-    padding: 40px 20px; /* Tăng padding để footer trông rộng rãi hơn */
-}
+    padding: 40px 10px; /* Tăng padding để footer trông rộng rãi hơn */
+    }
 
 .footer .row {
     display: flex;
     justify-content: space-between;
     align-items: start;
     flex-wrap: wrap;
-}
+    }
 
 .col1 {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-}
+    }
 
 .logo-img {
     width: 100%;
     max-width: 180px; /* Giảm nhẹ kích thước logo cho cân đối */
-}
+    }
 
 .logo_links {
     margin-top: 15px;
@@ -106,10 +106,10 @@
             <div class="col1 col-4">
                 <img src="../assets/images/logo-transparent.png" alt="" class="img-fluid logo-img">
                 <div class="logo_links">
-                    <img src="../assets/images/twitter-brands.svg" alt="">
-                    <img src="../assets/images/facebook-brands.svg" alt="">
-                    <img src="../assets/images/youtube-brands.svg" alt="">
-                    <img src="../assets/images/square-instagram-brands.svg" alt="">
+                    <img src="../assets/images/twitter-brands.svg" alt="twitter">
+                    <img src="../assets/images/facebook-brands.svg" alt="facebook">
+                    <img src="../assets/images/youtube-brands.svg" alt="youtube">
+                    <img src="../assets/images/square-instagram-brands.svg" alt="instagram">
                 </div>
             </div>
             <div class="col-4">
