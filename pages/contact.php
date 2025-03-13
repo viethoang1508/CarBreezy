@@ -16,7 +16,7 @@
 <body>
         <div class="banner" >
             <img style="" src="../assets/images/contact_banner_01.jpg" alt="">
-            <h1>CONTACT</h1>
+            <h1>CONTACT US</h1>
         </div>
     <div class="container">
         <h1 class="information">

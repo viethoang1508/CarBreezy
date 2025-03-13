@@ -19,7 +19,7 @@
         <div class="banner1">
             <img src="../assets/images/honda-civic-1-9932-17131664376171739260029-1713342786612-1713342786802744576194.webp" alt="">
                 <div class="content">
-                    <h1>ABOUT</h1>
+                    <h1>ABOUT US</h1>
                     <p>Bringing You the Best Cars with Passion & Innovation!</p>
                 </div>
         </div>

@@ -156,13 +156,34 @@
                     <p>Don’t wait—your dream car is just a test drive away! Visit CarBreezy today and hit the road in style! </p>
                 </div>
                 <div class="video_col">
-                    <video src="../assets/images/06d53d1660cd2fff8ef2140635ee6620.mp4"></video>
+                    <video controls autoplay muted loop class="w-100">
+                        <source src="../assets/images/06d53d1660cd2fff8ef2140635ee6620.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
         </div>
     </div>
-</body>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const video = document.querySelector(".video_col video");
 
+    function checkVisibility() {
+        const rect = video.getBoundingClientRect();
+        const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+        
+        if (isVisible) {
+            video.play();  // Nếu video trong viewport, tự động phát
+        } else {
+            video.pause(); // Nếu video ra khỏi viewport, tự động dừng
+        }
+    }
+
+    window.addEventListener("scroll", checkVisibility);
+});
+</script>
+
+</body>
 </html>
 <?php 
     require('../includes/footer.php');
