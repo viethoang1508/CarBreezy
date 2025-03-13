@@ -1,0 +1,34 @@
+# Bỏ qua tệp cấu hình cơ sở dữ liệu
+/includes/connect.php
+
+# Bỏ qua các tệp log hoặc tạm thời
+*.log
+*.tmp
+
+# Bỏ qua thư mục chứa tệp tải lên (nếu có)
+/assets/uploads/
+
+# Bỏ qua các tệp môi trường (nếu bạn dùng .env)
+.env
+
+# Bỏ qua các thư mục/thư viện được cài đặt tự động
+/vendor/
+/node_modules/
+
+# Bỏ qua các tệp cache hoặc build
+/cache/
+/build/
+
+# Bỏ qua các tệp IDE hoặc editor
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Bỏ qua các tệp sao lưu
+*.bak
+*.swp
+
+# Bỏ qua các tệp nhạy cảm khác (nếu có)
+config.php
+secrets.json
