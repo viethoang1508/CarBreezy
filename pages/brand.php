@@ -52,7 +52,7 @@ foreach ($types as $type) {
                         <div class="car-item">
                             <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['name'] ?>">
                             <p><?= $car['name'] ?></p>
-                            <p><?= number_format($car['price'], 0, ',', '.') ?> vnđ</p>
+                            <p><?= number_format($car['price'], 0, ',', '.') ?> VNĐ</p>
                         </div>
                     <?php endforeach; ?>
                 </div>
