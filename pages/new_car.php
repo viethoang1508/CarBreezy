@@ -52,6 +52,7 @@ foreach ($types as $type) {
            <?php require '../includes/car_menu.php'; ?>
         </div>
         <div class="content">
+<<<<<<< HEAD
             <h2>CARS</h2>
             <div class="type_filter">
                 <label for="type_filter">Type Filter</label>
@@ -59,6 +60,18 @@ foreach ($types as $type) {
                     <option value="all">All Types</option>
                     <?php foreach($types as $type): ?>
                         <option value="<?= htmlspecialchars($type) ?>"><?= htmlspecialchars($type) ?></option>
+=======
+            <h2> NEW CARS</h2>
+            <?php foreach ($cars as $type => $list): ?>
+                <h3><?= strtoupper($type) ?></h3>
+                <div class="car-list">
+                    <?php foreach ($list as $car): ?>
+                        <div class="car-item">
+                            <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['name'] ?>">
+                            <p><?= $car['name'] ?></p>
+                            <p><?= number_format($car['price'], 0, ',', '.') ?> VNĐ</p>
+                        </div>
+>>>>>>> 00b95c0e49a482f2ac7ea9699e0c41fca99cfd93
                     <?php endforeach; ?>
                 </select>
             </div>
