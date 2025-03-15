@@ -74,7 +74,7 @@
                     <div class="col-6 content">
                         <h3>
                             CarBreezy is a leading automotive digital marketplace that seeks to make car buying and selling easy, transparent and efficient.
-                    </h3>
+                        </h3>
                     <p>Your car buying destiny is in your hands, but we will help you every step of the way. We built this site to make car buying as fast and easy as possible.</p>
                     <p>From discovery to delivery, consumers can use CarBreezy to explore vehicles from an expansive, cross-brand selection of inventory from our vast network ...</p>
                     <button><a href="../pages/about.php">See more</a></button>
