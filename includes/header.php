@@ -22,6 +22,7 @@
             background-color: #D81324;
             color: white;
         }
+
         .container-fluid h1 {
             font-family: 'Oswald', sans-serif;
             margin-right: 10px;
@@ -40,6 +41,45 @@
             color: #D81324 !important; /* Đổi màu đỏ */
             font-weight: bold !important; /* In đậm */
         }
+
+        #searchForm {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#searchForm input {
+    width: 250px;
+    border: 2px solid #D81324;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+#searchForm input:focus {
+    border-color: #A9101B;
+    outline: none;
+    box-shadow: 0 0 8px rgba(216, 19, 36, 0.5);
+}
+
+#searchForm button {
+    background-color: #D81324 !important;
+    color: white !important;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#searchForm button:hover {
+    background-color: #A9101B !important;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+}
     </style>
 </head>
 <body>
@@ -56,12 +96,12 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
     
-                <!-- Ô tìm kiếm -->
-                <form class="search d-flex ms-3" role="search">
-                    <input class="form-control me-2 w-300" type="search" placeholder="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+               <!-- Ô tìm kiếm -->
+                <form id="searchForm" action="../backend/search.php" method="GET">
+                    <input type="text" id="searchInput" name="keyword" placeholder="Nhập từ khóa..." required>
+                    <button type="submit">Tìm kiếm</button>
                 </form>
-    
+
                 <!-- Danh mục menu -->
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
@@ -91,5 +131,20 @@
 
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Xử lý khi click nút search -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("searchForm").addEventListener("submit", function (event) {
+        let query = document.getElementById("searchInput").value.trim();
+
+        if (query === "") {
+            event.preventDefault(); // Ngăn chặn submit nếu không có từ khóa
+            alert("Vui lòng nhập từ khóa tìm kiếm!");
+        }
+    });
+});
+    </script>
+
 </body>
 </html>
