@@ -48,7 +48,8 @@ $mysqli->close(); // Đóng kết nối
         }
         .car-container {
             display: flex;
-                  
+            width: 80%;
+            margin: 0 auto;
         }
         .car-wrapper {
             display: flex;
@@ -139,7 +140,7 @@ $mysqli->close(); // Đóng kết nối
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="search_container">
         <h2 class="text-center text-danger">SEARCH RESULTS "<?php echo htmlspecialchars($keyword, ENT_QUOTES, 'UTF-8'); ?>"</h2>
         <?php if (!empty($cars)): ?>
             <div class="car-container">
