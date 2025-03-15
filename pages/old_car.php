@@ -136,3 +136,5 @@ foreach ($types as $type) {
     
 </body>
 </html>
+<?php
+require('../includes/footer.php'); ?>

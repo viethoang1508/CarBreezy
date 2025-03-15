@@ -104,3 +104,5 @@ foreach ($types as $type) {
     </script>
 </body>
 </html>
+<?php
+require '../includes/footer.php'; ?>
