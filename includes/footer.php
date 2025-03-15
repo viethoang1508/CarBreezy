@@ -8,17 +8,33 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        
-    .footer {
-    background-color: #222; /* Màu nền tối hơn để tăng độ tương phản */
-    color: white;
-    padding: 40px 10px; /* Tăng padding để footer trông rộng rãi hơn */
-    }
+        /* Định dạng chung */
+            body, html {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .footer {
+                background-color: #222;
+                color: white;
+                padding: 20px 10px;
+                font-size: 14px;
+                margin-top: auto; /* Đẩy footer xuống dưới */
+            }
+
+.footer-bottom {
+    text-align: center;
+    font-size: 13px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
 
 .footer .row {
     display: flex;
     justify-content: space-between;
-    align-items: start;
+    align-items: center;
     flex-wrap: wrap;
     }
 
@@ -54,6 +70,9 @@
 .logo_links img:hover {
     transform: scale(1.2);
     opacity: 0.8;
+}
+.logo-img:hover {
+    transform: none;
 }
 
 .col-4 h3 {
@@ -104,7 +123,7 @@
     <div class="footer">
         <div class="row">
             <div class="col1 col-4">
-                <img src="../assets/images/logo-transparent.png" alt="" class="img-fluid logo-img">
+                <img src="../assets/images/logo-transparent.png" alt="logo_brand" class="img-fluid logo-img">
                 <div class="logo_links">
                     <img src="../assets/images/twitter-brands.svg" alt="twitter">
                     <img src="../assets/images/facebook-brands.svg" alt="facebook">
