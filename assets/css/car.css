@@ -46,7 +46,10 @@ h2 {
     text-align: center;
     margin-bottom: 20px;
 }
-
+.brand_title{
+    font-family: 'Oswald', sans-serif;
+    color: #d41a2a;
+}
 h3 {
     font-size: 20px;
     color: #d41a2a;
@@ -55,88 +58,74 @@ h3 {
     padding-bottom: 5px;
 }
 
-.car-list {
+/* Car Display */
+.slider {
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
+    gap: 10px;
 }
-
+.car-list {
+    width: 800px; /* Giới hạn chiều rộng */
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+.car-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Hiệu ứng trượt */
+}
+.car-item:hover{
+    transform: scale(1.1);
+}
 .car-item {
-    background: #fff;
+    width: 250px;
+    flex-shrink: 0; /* Giữ kích thước cố định */
     padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 220px;
-    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
 }
-
-.car-item:hover {
-    transform: scale(1.05);
+.car-item h3 {
+    font-family: 'Oswald', sans-serif;
+    color: #D81324;
 }
-
+.car-item p {
+    font-family: 'Oswald', sans-serif;
+}
+.car_brand_name {
+    font-family: 'Times New Roman', Times, serif;
+}
 .car-item img {
     width: 100%;
-    height: 140px;
+    height: auto;
+    max-width: 230px;
+    max-height: 100px;
     object-fit: cover;
-    border-radius: 5px;
 }
-
-.car-item p {
-    margin: 8px 0;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.car-item p:last-child {
-    font-size: 16px;
+.car-item .price {
+    background-color: #D81324;
+    color: white;
+    padding: 5px;
     font-weight: bold;
-    color: #d41a2a;
 }
-/* Thiết lập mặc định cho menu */
-nav ul {
-    list-style: none;
+.arrow {
+    font-size: 24px;
+    cursor: pointer;
+    user-select: none;
+    color: #D81324;
+}
+/* Filter */
+.type_filter{
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 0;
+    flex-direction: row;
+    gap: 10px;
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 20px;
 }
-
-nav ul li {
-    display: inline-block;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: white; /* Màu chữ mặc định */
-    padding: 10px 15px;
-    font-size: 18px;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
-    position: relative; /* Để tạo hiệu ứng gạch chân */
-}
-
-/* Khi hover vào */
-nav ul li a:hover {
-    color: #ffcc00; /* Đổi màu chữ */
-    text-shadow: 2px 2px 5px rgba(255, 204, 0, 0.8); /* Đổ bóng */
-}
-
-/* Hiệu ứng gạch chân khi hover */
-nav ul li a::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: -5px;
-    width: 0%;
-    height: 3px;
-    background-color: black; /* Màu gạch chân */
-    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
-}
-
-/* Khi hover vào thì gạch chân xuất hiện */
-nav ul li a:hover::after {
-    width: 100%;
-    left: 0;
+.type_filter label {
+    width: fit-content;
 }

@@ -1,5 +1,7 @@
-<?php 
+
+<?php
     $current_page = basename($_SERVER['PHP_SELF']); // Lấy tên file trang hiện tại
+    require('../pages/visitor_counter.php'); // Thêm bộ đếm khách truy cập
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -119,8 +121,9 @@
                 </div>
     
                 <!-- Logo số người sử dụng -->
-                 <div class="d-flex ms-auto">
+                <div class="d-flex ms-auto align-items-center">
                     <img src="../assets/images/people-fill.svg" alt="" width="20">
+                    <span class="ms-2">Visitors: <?php echo number_format($visitor_count); ?></span>
                  </div>
             </div>
         </nav>

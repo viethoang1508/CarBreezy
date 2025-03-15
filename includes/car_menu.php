@@ -65,51 +65,51 @@ if (!$result_brands) {
             color: #fff;
         }
         /* Thiết lập mặc định cho menu */
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 0;
-}
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 0;
+        }
 
-nav ul li {
-    display: inline-block;
-}
+        nav ul li {
+            display: inline-block;
+        }
 
-nav ul li a {
-    text-decoration: none;
-    color: white; /* Màu chữ mặc định */
-    padding: 10px 15px;
-    font-size: 18px;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
-    position: relative; /* Để tạo hiệu ứng gạch chân */
-}
+        nav ul li a {
+            text-decoration: none;
+            color: white; /* Màu chữ mặc định */
+            padding: 10px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            position: relative; /* Để tạo hiệu ứng gạch chân */
+        }
 
-/* Khi hover vào */
-nav ul li a:hover {
-    color: #ffcc00; /* Đổi màu chữ */
-    text-shadow: 2px 2px 5px rgba(255, 204, 0, 0.8); /* Đổ bóng */
-}
+        /* Khi hover vào */
+        nav ul li a:hover {
+            color: #ffcc00; /* Đổi màu chữ */
+            text-shadow: 2px 2px 5px rgba(255, 204, 0, 0.8); /* Đổ bóng */
+        }
 
-/* Hiệu ứng gạch chân khi hover */
-nav ul li a::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: -5px;
-    width: 0%;
-    height: 3px;
-    background-color: black; /* Màu gạch chân */
-    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
-}
+        /* Hiệu ứng gạch chân khi hover */
+        nav ul li a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 0%;
+            height: 3px;
+            background-color: black; /* Màu gạch chân */
+            transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+        }
 
-/* Khi hover vào thì gạch chân xuất hiện */
-nav ul li a:hover::after {
-    width: 100%;
-    left: 0;
-}
+        /* Khi hover vào thì gạch chân xuất hiện */
+        nav ul li a:hover::after {
+            width: 100%;
+            left: 0;
+        }
     </style>
     
 <body>
@@ -122,7 +122,7 @@ nav ul li a:hover::after {
             </ul>
             <a href="new_car.php"><h4>NEW</h4></a>
             <a href="old_car.php"><h4>USED</h4></a>
-            <h4>SALES</h4>
+            <a href="sale.php"><h4>SALES</h4></a>
     </div>
 </body>
 </html>
