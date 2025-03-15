@@ -18,6 +18,9 @@
         .header h1 {
             color: #D81324;
         }
+        .container-fluid {
+            gap: 10px;
+        }
         .header .search  button {
             background-color: #D81324;
             color: white;
@@ -43,43 +46,46 @@
         }
 
         #searchForm {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Oswald', sans-serif;
+            color: #D81324;
+            justify-items: center;
+        }
 
-#searchForm input {
-    width: 250px;
-    border: 2px solid #D81324;
-    border-radius: 5px;
-    padding: 8px 12px;
-    font-size: 16px;
-    transition: all 0.3s ease-in-out;
-}
+        #searchForm input {
+            width: 250px;
+            border: 2px solid #D81324;
+            border-radius: 5px;
+            padding: 8px 12px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
 
-#searchForm input:focus {
-    border-color: #A9101B;
-    outline: none;
-    box-shadow: 0 0 8px rgba(216, 19, 36, 0.5);
-}
+        #searchForm input:focus {
+            border-color: #A9101B;
+            outline: none;
+            box-shadow: 0 0 8px rgba(216, 19, 36, 0.5);
+        }
 
-#searchForm button {
-    background-color: #D81324 !important;
-    color: white !important;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 18px;
-    font-size: 16px;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-}
+        #searchForm button {
+            background-color: #D81324 !important;
+            color: white !important;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
 
-#searchForm button:hover {
-    background-color: #A9101B !important;
-    transform: translateY(-2px);
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
-}
+        #searchForm button:hover {
+            background-color: #A9101B !important;
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -98,8 +104,8 @@
     
                <!-- Ô tìm kiếm -->
                 <form id="searchForm" action="../backend/search.php" method="GET">
-                    <input type="text" id="searchInput" name="keyword" placeholder="Nhập từ khóa..." required>
-                    <button type="submit">Tìm kiếm</button>
+                    <input type="text" id="searchInput" name="keyword" placeholder="Type products ..." required>
+                    <button type="submit">Search</button>
                 </form>
 
                 <!-- Danh mục menu -->

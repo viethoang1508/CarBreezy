@@ -9,11 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         /* Định dạng chung */
-            body, html {
-                height: 100%;
+            body {
                 margin: 0;
-                display: flex;
-                flex-direction: column;
+                padding:0;
+                width: 100%;
             }
 
             .footer {
@@ -21,44 +20,45 @@
                 color: white;
                 padding: 20px 10px;
                 font-size: 14px;
-                margin-top: auto; /* Đẩy footer xuống dưới */
+                margin-top: auto; 
+                width: 100% !important;
             }
 
-.footer-bottom {
-    text-align: center;
-    font-size: 13px;
-    padding-top: 10px;
-    padding-bottom: 5px;
-}
+            .footer-bottom {
+                text-align: center;
+                font-size: 13px;
+                padding-top: 10px;
+                padding-bottom: 5px;
+            }
 
-.footer .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    }
+            .footer .row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                }
 
-.col1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    }
+            .col1 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                }
 
-.logo-img {
-    width: 100%;
-    max-width: 180px; /* Giảm nhẹ kích thước logo cho cân đối */
-    }
+            .logo-img {
+                width: 100%;
+                max-width: 180px; /* Giảm nhẹ kích thước logo cho cân đối */
+                }
 
-.logo_links {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
+            .logo_links {
+                margin-top: 15px;
+                display: flex;
+                flex-direction: row;
+                gap: 15px;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+            }
 
 .logo_links img {
     width: 100%;
