@@ -53,7 +53,7 @@ foreach ($types as $type) {
         </div>
 
         <div class="content">
-            <h2>CARS</h2>
+            <h2>USED CARS</h2>
             <div class="type_filter">
                 <label for="type_filter">Type Filter</label>
                 <select id="type_filter" class="form-select">
