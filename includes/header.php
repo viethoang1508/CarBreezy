@@ -169,6 +169,9 @@ nav ul li a:hover::after {
                         <li class="nav-item">
                             <a class="nav-link <?php if ($current_page == 'contact.php') echo 'active'; ?>" href="../pages/contact.php">CONTACT</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php if ($current_page == 'gallery.php') echo 'active'; ?>" href="../pages/gallery.php">GALLERY</a>
+                        </li>
                     </ul>
                 </div>
     
