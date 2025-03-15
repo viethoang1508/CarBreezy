@@ -122,7 +122,7 @@ if (!$result_brands) {
             </ul>
             <a href="new_car.php"><h4>NEW</h4></a>
             <a href="old_car.php"><h4>USED</h4></a>
-            <h4>SALES</h4>
+            <a href="sale.php"><h4>SALES</h4></a>
     </div>
 </body>
 </html>
