@@ -45,6 +45,16 @@
             font-weight: bold !important; /* In đậm */
         }
 
+        .logo h1 {
+            color: #D81324 !important; /* Màu đỏ */
+            transition: color 0.3s ease-in-out; /* Hiệu ứng chuyển màu */
+                }
+
+        .logo:hover h1 {
+            color: #A9101B !important; /* Màu đậm hơn khi hover */
+            }
+
+
         #searchForm {
             display: flex;
             align-items: center;
@@ -138,10 +148,11 @@ nav ul li a:hover::after {
     <div class="header">
         <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
             <div class="container-fluid">
-                <div class="logo d-flex align-items-center">
-                    <img src="../assets/images/logo-transparent.png" alt="Logo" width="60" class="d-inline-block">
-                    <h1 class="ms-2">CarBreezy</h1>
-                </div>
+            <a href="../pages/home.php" class="logo d-flex align-items-center text-decoration-none">
+                <img src="../assets/images/logo-transparent.png" alt="Logo" width="60" class="d-inline-block">
+                <h1 class="ms-2">CarBreezy</h1>
+            </a>
+
     
                 <!-- Nút toggle menu trên di động -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
