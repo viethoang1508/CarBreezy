@@ -15,8 +15,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
 
     <style>
-        .header h1 {
+        .header  h1 {
             color: #D81324;
+        }
+        .container-fluid a {
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
         }
         .container-fluid {
             gap: 10px;
@@ -148,11 +152,10 @@ nav ul li a:hover::after {
     <div class="header">
         <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
             <div class="container-fluid">
-            <a href="../pages/home.php" class="logo d-flex align-items-center text-decoration-none">
-                <img src="../assets/images/logo-transparent.png" alt="Logo" width="60" class="d-inline-block">
-                <h1 class="ms-2">CarBreezy</h1>
-            </a>
-
+                <div class="logo d-flex align-items-center">
+                    <a href="../pages/home.php"><img src="../assets/images/logo-transparent.png" alt="Logo" width="60" class="d-inline-block"></a>
+                    <a href="../pages/home.php"><h1 class="ms-2">CarBreezy</h1></a>
+                </div>
     
                 <!-- Nút toggle menu trên di động -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -179,6 +182,9 @@ nav ul li a:hover::after {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link <?php if ($current_page == 'contact.php') echo 'active'; ?>" href="../pages/contact.php">CONTACT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php if ($current_page == 'gallery.php') echo 'active'; ?>" href="../pages/gallery.php">GALLERY</a>
                         </li>
                     </ul>
                 </div>
