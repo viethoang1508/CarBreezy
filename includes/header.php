@@ -143,8 +143,8 @@ nav ul li a:hover::after {
         <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
             <div class="container-fluid">
                 <div class="logo d-flex align-items-center">
-                    <a href="home.php"><img src="../assets/images/logo-transparent.png" alt="Logo" width="60" class="d-inline-block"></a>
-                    <a href="home.php"><h1 class="ms-2">CarBreezy</h1></a>
+                    <a href="../pages/home.php"><img src="../assets/images/logo-transparent.png" alt="Logo" width="60" class="d-inline-block"></a>
+                    <a href="../pages/home.php"><h1 class="ms-2">CarBreezy</h1></a>
                 </div>
     
                 <!-- Nút toggle menu trên di động -->
