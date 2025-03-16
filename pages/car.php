@@ -47,6 +47,7 @@ foreach ($types as $type) {
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
     <title>Car</title>
     
+    
 </head>
 <body>
     <div class="container">
@@ -133,7 +134,42 @@ foreach ($types as $type) {
                 }
             });
         });
+        // Thêm modal popup vào cuối body
+        const modalHTML = `
+            <div class="modal fade" id="carDetailModal" tabindex="-1" aria-labelledby="carDetailModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+            <h5 class="modal-title" id="carDetailModalLabel">Chi tiết xe</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+                <div class="modal-body">
+                <div id="carDetailContent">
+          <!-- Nội dung sẽ được tải động -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`;
+
+        document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+        // Bắt sự kiện click trên xe để mở popup
+        const carItems = document.querySelectorAll(".car-item");
+        carItems.forEach(item => {
+            item.addEventListener("click", function () {
+            const carName = this.querySelector("h3").textContent;
+        fetch(`get_car_details.php?name=${encodeURIComponent(carName)}`)
+            .then(response => response.text())
+            .then(data => {
+        document.getElementById("carDetailContent").innerHTML = data;
+        new bootstrap.Modal(document.getElementById("carDetailModal")).show();
+      });
+  });
+});
+
     </script>
+    
 </body>
 </html>
 <?php
