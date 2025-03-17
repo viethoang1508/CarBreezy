@@ -84,62 +84,95 @@
             
             <div class="background-consult-form">
                 <div class="consult-form">
-                <h2>BOOK FOR CONSULTING</h2>
-                <form action="" method="post">
-                    <div class="double-row">
-                        <input type="text" name="first_name" placeholder="First Name" required>
-                        <input type="text" name="last_name" placeholder="Last Name" required>
-                    </div>
-                    <input type="email" name="email" placeholder="Email" required>
-                    <div class="double-row">
-                        <input type="text" name="phone" placeholder="Phone" required>
-                        <input type="text" name="gender" placeholder="Gender" required>
-                    </div>
-                    <input type="text" name="address" placeholder="Address" required>
-                    <button type="submit" class="submit-btn">Submit</button>
-                </form>
-            </div>
-            </div>
-            <!-- Hiển thị xe -->
-            <h2 class="about_us">CARS</h2>
-            <div class="slider">
-                <span class="arrow" onclick="prevSlide()">&#9665;</span>
-                <div class="car-container">
-                    <div class="car-wrapper" id="car-wrapper">
-                        <?php foreach ($cars as $car) : ?>
-                            <div class="car">
-                                <p><strong><?= $car['status'] ?></strong> | <strong><?= $car['type'] ?></strong></p>
-                                <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['car_name'] ?>">
-                                <h3><?= $car['car_name'] ?></h3>
-                                <p><strong>Hãng:</strong> <span class="car_brand_name"><?= $car['brand_name'] ?></span></p>
-                                <p class="price"><?= number_format($car['price'], 0, ',', '.') ?> VNĐ</p>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
+                    <h2>BOOK FOR CONSULTING</h2>
+                    <form id="consultForm">
+                        <div class="double-row">
+                            <input type="text" name="first_name" placeholder="First Name" required>
+                            <input type="text" name="last_name" placeholder="Last Name" required>
+                        </div>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <div class="double-row">
+                            <input type="text" name="phone" placeholder="Phone" required>
+                            <input type="text" name="gender" placeholder="Gender (Nam/Nữ)" required>
+                        </div>
+                        <input type="text" name="address" placeholder="Address" required>
+                        <button type="submit" class="submit-btn">Submit</button>
+                    </form>
+                    <div id="errorBox" class="error-box" style="display: none;"></div>
+                    <div id="responseMessage"></div>
                 </div>
-                <span class="arrow" onclick="nextSlide()">&#9655;</span>
             </div>
-            <script>
-                let index = 0;
-                const carWrapper = document.getElementById("car-wrapper");
-                const carWidth = 260; // 250px + margin
-                const totalCars = document.querySelectorAll(".car").length;
-                const maxIndex = totalCars - 3; // Hiển thị 3 xe mỗi lần
 
-                function updateSlide() {
-                    carWrapper.style.transform = `translateX(${-index * carWidth}px)`;
-                }
+         <!-- Hiển thị xe -->
+ <h2 class="about_us">CARS</h2>
+<div class="slider">
+    <span class="arrow" onclick="prevSlide()">&#9665;</span>
+    <div class="car-container">
+        <div class="car-wrapper" id="car-wrapper">
+            <?php foreach ($cars as $car) : ?>
+                <div class="car car-item">
+                    <p><strong><?= $car['status'] ?></strong> | <strong><?= $car['type'] ?></strong></p>
+                    <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['car_name'] ?>">
+                    <h3><?= $car['car_name'] ?></h3>
+                    <p><strong>Hãng:</strong> <span class="car_brand_name"><?= $car['brand_name'] ?></span></p>
+                    <p class="price"><?= number_format($car['price'], 0, ',', '.') ?> VNĐ</p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <span class="arrow" onclick="nextSlide()">&#9655;</span>
+</div>
+          <!-- Popup Modal -->
+<div class="modal fade" id="carDetailModal" tabindex="-1" aria-labelledby="carDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="carDetailModalLabel">Chi tiết xe</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="carDetailContent">
+                    <!-- Nội dung sẽ được tải động -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let index = 0;
+    const carWrapper = document.getElementById("car-wrapper");
+    const carWidth = 260;
+    const totalCars = document.querySelectorAll(".car").length;
+    const maxIndex = totalCars - 3;
 
-                function nextSlide() {
-                    if (index < maxIndex) index++;
-                    updateSlide();
-                }
+    function updateSlide() {
+        carWrapper.style.transform = `translateX(${-index * carWidth}px)`;
+    }
 
-                function prevSlide() {
-                    if (index > 0) index--;
-                    updateSlide();
-                }
-            </script>
+    function nextSlide() {
+        if (index < maxIndex) index++;
+        updateSlide();
+    }
+
+    function prevSlide() {
+        if (index > 0) index--;
+        updateSlide();
+    }
+
+    const carItems = document.querySelectorAll(".car-item");
+    carItems.forEach(item => {
+        item.addEventListener("click", function () {
+            const carName = this.querySelector("h3").textContent;
+            fetch(`get_car_details.php?name=${encodeURIComponent(carName)}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("carDetailContent").innerHTML = data;
+                    new bootstrap.Modal(document.getElementById("carDetailModal")).show();
+                });
+        });
+    });
+</script>
+
             <!-- Video -->
             <div class="video_section">
                 <div class="video_content">
@@ -181,6 +214,49 @@
 
     window.addEventListener("scroll", checkVisibility);
 });
+</script>
+<script>
+    document.getElementById('consultForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const errorBox = document.getElementById('errorBox');
+        const form = this;
+        const formData = new FormData(form);
+        let errors = [];
+
+        const firstName = formData.get('first_name').trim();
+        const lastName = formData.get('last_name').trim();
+        const email = formData.get('email').trim();
+        const phone = formData.get('phone').trim();
+        const gender = formData.get('gender').trim();
+
+        // Validation rules
+        if (!/^[a-zA-ZÀ-ỹ\s]+$/.test(firstName)) errors.push('Họ không hợp lệ.');
+        if (!/^[a-zA-ZÀ-ỹ\s]+$/.test(lastName)) errors.push('Tên không hợp lệ.');
+        if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) errors.push('Địa chỉ email không hợp lệ.');
+        if (!/^\d{10}$/.test(phone)) errors.push('Số điện thoại không hợp lệ .');
+        if (!/^(Nam|Nữ)$/i.test(gender)) errors.push('Giới tính không hợp lệ.');
+
+        if (errors.length > 0) {
+            errorBox.innerHTML = errors.join('<br>');
+            errorBox.style.display = 'block';
+            return;
+        } else {
+            errorBox.style.display = 'none';
+        }
+
+        fetch('../includes/submit_form.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('responseMessage').innerText = 'Đăng ký thành công!';
+            document.getElementById('consultForm').reset();
+        })
+        .catch(error => {
+            document.getElementById('responseMessage').innerText = 'Đã xảy ra lỗi. Vui lòng thử lại.';
+        });
+    });
 </script>
 
 </body>
