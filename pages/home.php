@@ -83,26 +83,25 @@
             </div>
             
             <div class="background-consult-form">
-    <div class="consult-form">
-    <h2>BOOK FOR CONSULTING</h2>
-    <form id="consultForm">
-        <div class="double-row">
-            <input type="text" name="first_name" placeholder="First Name" required>
-            <input type="text" name="last_name" placeholder="Last Name" required>
-        </div>
-        <input type="email" name="email" placeholder="Email" required>
-        <div class="double-row">
-            <input type="text" name="phone" placeholder="Phone" required>
-            <input type="text" name="gender" placeholder="Gender (Nam/Nữ)" required>
-        </div>
-        <input type="text" name="address" placeholder="Address" required>
-        <button type="submit" class="submit-btn">Submit</button>
-    </form>
-    <div id="errorBox" class="error-box" style="display: none;"></div>
-    <div id="responseMessage"></div>
-</div>
-</div>
-</div>
+                <div class="consult-form">
+                    <h2>BOOK FOR CONSULTING</h2>
+                    <form id="consultForm">
+                        <div class="double-row">
+                            <input type="text" name="first_name" placeholder="First Name" required>
+                            <input type="text" name="last_name" placeholder="Last Name" required>
+                        </div>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <div class="double-row">
+                            <input type="text" name="phone" placeholder="Phone" required>
+                            <input type="text" name="gender" placeholder="Gender (Nam/Nữ)" required>
+                        </div>
+                        <input type="text" name="address" placeholder="Address" required>
+                        <button type="submit" class="submit-btn">Submit</button>
+                    </form>
+                    <div id="errorBox" class="error-box" style="display: none;"></div>
+                    <div id="responseMessage"></div>
+                </div>
+            </div>
 
             <!-- Hiển thị xe -->
             <h2 class="about_us">CARS</h2>
