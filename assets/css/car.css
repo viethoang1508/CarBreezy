@@ -150,6 +150,7 @@ h3 {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    overflow: auto; /* Cho phép cuộn nếu nội dung popup quá dài */
 }
 
 .popup-content {
@@ -157,11 +158,12 @@ h3 {
     padding: 20px;
     width: 600px;
     max-width: 90%;
+    max-height: 90vh; /* Giới hạn chiều cao để nội dung không vượt quá màn hình */
+    overflow-y: auto; /* Cho phép cuộn nội dung popup */
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
     position: relative;
 }
-
 .close-popup {
     position: absolute;
     top: 10px;
