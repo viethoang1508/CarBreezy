@@ -22,7 +22,7 @@ $cars = [];
 foreach ($types as $type) {
     $query = "SELECT brands.name AS brand_name, products.name AS car_name, products.price, products.type, products.status, products.image, products.created_at 
                 FROM products 
-                join brands on products.brand_id = brands.id
+                JOIN brands ON products.brand_id = brands.id
                 WHERE type = '$type' 
                 ORDER BY created_at DESC";
     $result = $mysqli->query($query);
@@ -41,13 +41,10 @@ foreach ($types as $type) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../assets/css/car.css">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
     <title>Car</title>
-    
-    
 </head>
 <body>
     <div class="container">
@@ -69,11 +66,11 @@ foreach ($types as $type) {
             <?php foreach ($cars as $type => $list): ?>
                 <h3 class="brand_title" data-type="<?= htmlspecialchars($type) ?>"><?= strtoupper($type) ?></h3>
                 <div class="slider car-section" data-type="<?= htmlspecialchars($type) ?>">
-                    <span class="arrow" onclick="prevSlide()">&#9665;</span>
+                <span class="arrow" onclick="prevSlide()">&#9665;</span>
                     <div class="car-list">
                         <div class="car-wrapper">
                             <?php foreach ($list as $car): ?>
-                                <div class="car-item">
+                                <div class="car-item" data-name="<?= htmlspecialchars($car['car_name']) ?>">
                                     <p><strong><?= $car['status'] ?></strong> | <strong><?= $car['type'] ?></strong></p>
                                     <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['car_name'] ?>">
                                     <h3><?= $car['car_name'] ?></h3>
@@ -85,7 +82,7 @@ foreach ($types as $type) {
                     </div>
                     <span class="arrow" onclick="nextSlide()">&#9655;</span>
                 </div>
-                    <script>
+                <script>
                         let index = 0;
                         const carWrapper = document.getElementById("car-wrapper");
                         const carWidth = 260; // 250px + margin
@@ -106,72 +103,49 @@ foreach ($types as $type) {
                             updateSlide();
                         }
                     </script>
-            <?php endforeach; ?>
-
+                <?php endforeach; ?>
         </div>
     </div>
-    <script>
-        document.getElementById("type_filter").addEventListener("change", function () {
-            let selectedType = this.value.toLowerCase();
-            let carSections = document.querySelectorAll(".car-section");
-            let titles = document.querySelectorAll(".brand_title");
+    
+    <!-- Modal Bootstrap -->
+    <div class="modal fade" id="carDetailModal" tabindex="-1" aria-labelledby="carDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="carDetailModalLabel">Chi tiết xe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="carDetailContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            carSections.forEach(section => {
-                let type = section.getAttribute("data-type").toLowerCase();
-                if (selectedType === "all" || type === selectedType) {
-                    section.style.display = "flex";
-                } else {
-                    section.style.display = "none";
-                }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("type_filter").addEventListener("change", function () {
+                let selectedType = this.value.toLowerCase();
+                document.querySelectorAll(".car-section, .brand_title").forEach(section => {
+                    section.style.display = (selectedType === "all" || section.getAttribute("data-type").toLowerCase() === selectedType) ? "block" : "none";
+                });
             });
 
-            titles.forEach(title => {
-                let type = title.getAttribute("data-type").toLowerCase();
-                if (selectedType === "all" || type === selectedType) {
-                    title.style.display = "flex";
-                } else {
-                    title.style.display = "none";
-                }
+            document.querySelectorAll(".car-item").forEach(item => {
+                item.addEventListener("click", function () {
+                    let carName = this.getAttribute("data-name");
+                    fetch(`get_car_details.php?name=${encodeURIComponent(carName)}`)
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById("carDetailContent").innerHTML = data;
+                            new bootstrap.Modal(document.getElementById("carDetailModal")).show();
+                        });
+                });
             });
         });
-        // Thêm modal popup vào cuối body
-        const modalHTML = `
-            <div class="modal fade" id="carDetailModal" tabindex="-1" aria-labelledby="carDetailModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                <div class="modal-header">
-            <h5 class="modal-title" id="carDetailModalLabel">Chi tiết xe</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-                <div class="modal-body">
-                <div id="carDetailContent">
-          <!-- Nội dung sẽ được tải động -->
-        </div>
-      </div>
-    </div>
-  </div>
-</div>`;
-
-        document.body.insertAdjacentHTML("beforeend", modalHTML);
-
-        // Bắt sự kiện click trên xe để mở popup
-        const carItems = document.querySelectorAll(".car-item");
-        carItems.forEach(item => {
-            item.addEventListener("click", function () {
-            const carName = this.querySelector("h3").textContent;
-        fetch(`get_car_details.php?name=${encodeURIComponent(carName)}`)
-            .then(response => response.text())
-            .then(data => {
-        document.getElementById("carDetailContent").innerHTML = data;
-        new bootstrap.Modal(document.getElementById("carDetailModal")).show();
-      });
-  });
-});
-
     </script>
-    
 </body>
 </html>
 <?php
-    require('../includes/footer.php');
+require('../includes/footer.php');
 ?>
