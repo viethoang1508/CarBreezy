@@ -66,6 +66,7 @@ foreach ($types as $type) {
             <?php foreach ($cars as $type => $list): ?>
                 <h3 class="brand_title" data-type="<?= htmlspecialchars($type) ?>"><?= strtoupper($type) ?></h3>
                 <div class="slider car-section" data-type="<?= htmlspecialchars($type) ?>">
+                <span class="arrow" onclick="prevSlide()">&#9665;</span>
                     <div class="car-list">
                         <div class="car-wrapper">
                             <?php foreach ($list as $car): ?>
@@ -79,6 +80,7 @@ foreach ($types as $type) {
                             <?php endforeach; ?>
                         </div>
                     </div>
+                    <span class="arrow" onclick="nextSlide()">&#9655;</span>
                 </div>
                 <script>
                         let index = 0;
