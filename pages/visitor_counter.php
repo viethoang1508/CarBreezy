@@ -1,31 +1,37 @@
 <?php
-    session_start();
-    $counter_file = '../includes/counter.txt';
-    
-    if (!file_exists($counter_file)) {
-        file_put_contents($counter_file, "0");
+session_start();
+
+// Định nghĩa thời gian hết hạn của một phiên truy cập (giây)
+$timeout = 300; // 5 phút
+$dataFile = "visitors.json";
+
+// Đọc dữ liệu từ tệp JSON
+if (file_exists($dataFile)) {
+    $data = json_decode(file_get_contents($dataFile), true);
+} else {
+    $data = [];
+}
+
+// Lấy địa chỉ IP của người dùng
+$ip = $_SERVER['REMOTE_ADDR'];
+$now = time();
+
+// Cập nhật danh sách truy cập
+$data[$ip] = $now;
+
+// Loại bỏ các truy cập đã hết hạn
+foreach ($data as $key => $timestamp) {
+    if ($now - $timestamp > $timeout) {
+        unset($data[$key]);
     }
-    
-    $visitor_count = (int) file_get_contents($counter_file);
-    
-    if (!isset($_SESSION['visited'])) {
-        $_SESSION['visited'] = true;
-        $visitor_count++;
-        file_put_contents($counter_file, $visitor_count);
-    }
+}
+
+// Lưu lại dữ liệu cập nhật
+file_put_contents($dataFile, json_encode($data));
+
+// Đếm số lượng người đang truy cập
+$onlineUsers = count($data);
+
+// Xuất biến để sử dụng trong header
+$visitor_count = $onlineUsers;
 ?>
-<div class="visitor-counter">
-    <p>Visitors: <?php echo $visitor_count; ?></p>
-</div>
-<style>
-    .visitor-counter {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-</style>

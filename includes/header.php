@@ -146,6 +146,11 @@ nav ul li a:hover::after {
     width: 100%;
     left: 0;
 }
+.visitor-count {
+    color: #D81324 !important; /* Màu đỏ */
+    font-weight: bold;
+    font-size: 16px;
+}
     </style>
 </head>
 <body>
@@ -192,7 +197,7 @@ nav ul li a:hover::after {
                 <!-- Logo số người sử dụng -->
                 <div class="d-flex ms-auto align-items-center">
                     <img src="../assets/images/people-fill.svg" alt="" width="20">
-                    <span class="ms-2">Visitors: <?php echo number_format($visitor_count); ?></span>
+                    <span class="ms-2 visitor-count">Visitors: <?php echo number_format($visitor_count); ?></span>
                  </div>
             </div>
         </nav>
