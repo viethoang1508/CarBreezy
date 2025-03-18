@@ -81,6 +81,29 @@ foreach ($types as $type) {
                     </div>
                     <span class="arrow" onclick="nextSlide()">&#9655;</span>
                 </div>
+                <script>
+                    document.querySelectorAll(".slider").forEach(slider => {
+                        let carWrapper = slider.querySelector(".car-wrapper"); // Lấy danh sách xe của slider đó
+                        let carItems = slider.querySelectorAll(".car-item"); // Danh sách xe
+                        let carWidth = 260; // 250px + margin
+                        let index = 0;
+                        let maxIndex = Math.max(0, carItems.length - 3);
+
+                        function updateSlide() {
+                            carWrapper.style.transform = `translateX(${-index * carWidth}px)`;
+                        }
+
+                        slider.querySelector(".arrow:first-of-type").addEventListener("click", function() {
+                            if (index > 0) index--;
+                            updateSlide();
+                        });
+
+                        slider.querySelector(".arrow:last-of-type").addEventListener("click", function() {
+                            if (index < maxIndex) index++;
+                            updateSlide();
+                        });
+                    });
+                </script>
             <?php endforeach; ?>
         </div>
     </div>
