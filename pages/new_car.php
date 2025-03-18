@@ -53,9 +53,9 @@ foreach ($types as $type) {
             <h2>NEW CARS</h2>
             
             <div class="type_filter">
-                <label for="type_filter">Lọc theo loại</label>
+                <label for="type_filter">Types Filter</label>
                 <select id="type_filter" class="form-select">
-                    <option value="all">Tất cả</option>
+                    <option value="all">ALL</option>
                     <?php foreach ($types as $type): ?>
                         <option value="<?= htmlspecialchars($type) ?>"><?= htmlspecialchars($type) ?></option>
                     <?php endforeach; ?>
