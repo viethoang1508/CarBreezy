@@ -35,7 +35,7 @@ if (!$result) {
             <?php while ($row = $result->fetch_assoc()): ?>
                 <div class="col-md-4 col-sm-6 mb-4">
                     <div class="gallery-item">
-                        <img src="../assets/images/car_picture/<?= htmlspecialchars($row['image']) ?>" 
+                        <img src="../assets/images/car_gallery/<?= htmlspecialchars($row['image']) ?>" 
                              alt="<?= htmlspecialchars($row['car_name']) ?>" 
                              class="img-fluid gallery-img">
                         <p class="text-center mt-2"><strong><?= htmlspecialchars($row['brand_name']) ?> - <?= htmlspecialchars($row['car_name']) ?></strong></p>
