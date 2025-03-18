@@ -230,11 +230,11 @@
         const gender = formData.get('gender').trim();
 
         // Validation rules
-        if (!/^[a-zA-ZÀ-ỹ\s]+$/.test(firstName)) errors.push('Họ không hợp lệ.');
-        if (!/^[a-zA-ZÀ-ỹ\s]+$/.test(lastName)) errors.push('Tên không hợp lệ.');
-        if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) errors.push('Địa chỉ email không hợp lệ.');
-        if (!/^\d{10}$/.test(phone)) errors.push('Số điện thoại không hợp lệ .');
-        if (!/^(Nam|Nữ)$/i.test(gender)) errors.push('Giới tính không hợp lệ.');
+        if (!/^[a-zA-ZÀ-ỹ\s]+$/.test(firstName)) errors.push('Invalid surname.');
+        if (!/^[a-zA-ZÀ-ỹ\s]+$/.test(lastName)) errors.push('Invalid name.');
+        if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) errors.push('Invalid email.');
+        if (!/^\d{10}$/.test(phone)) errors.push('Invalid phone.');
+        if (!/^(Nam|Nữ)$/i.test(gender)) errors.push('Invalid gender.');
 
         if (errors.length > 0) {
             errorBox.innerHTML = errors.join('<br>');
@@ -250,11 +250,11 @@
         })
         .then(response => response.text())
         .then(data => {
-            document.getElementById('responseMessage').innerText = 'Đăng ký thành công!';
+            document.getElementById('responseMessage').innerText = 'Sign up successfully!';
             document.getElementById('consultForm').reset();
         })
         .catch(error => {
-            document.getElementById('responseMessage').innerText = 'Đã xảy ra lỗi. Vui lòng thử lại.';
+            document.getElementById('responseMessage').innerText = 'Error. Try again!';
         });
     });
 </script>

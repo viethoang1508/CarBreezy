@@ -70,7 +70,7 @@ foreach ($types as $type) {
                     <div class="car-list">
                         <div class="car-wrapper">
                             <?php foreach ($list as $car): ?>
-                                <div class="car-item">
+                                <div class="car-item" data-name="<?= htmlspecialchars($car['car_name']) ?>">
                                     <p><strong><?= $car['status'] ?></strong> | <strong><?= $car['type'] ?></strong></p>
                                     <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['car_name'] ?>">
                                     <h3><?= $car['car_name'] ?></h3>
@@ -82,27 +82,29 @@ foreach ($types as $type) {
                     </div>
                     <span class="arrow" onclick="nextSlide()">&#9655;</span>
                 </div>
-                    <script>
+                <script>
+                    document.querySelectorAll(".slider").forEach(slider => {
+                        let carWrapper = slider.querySelector(".car-wrapper"); // Lấy danh sách xe của slider đó
+                        let carItems = slider.querySelectorAll(".car-item"); // Danh sách xe
+                        let carWidth = 260; // 250px + margin
                         let index = 0;
-                        const carWrapper = document.getElementById("car-wrapper");
-                        const carWidth = 260; // 250px + margin
-                        const totalCars = document.querySelectorAll(".car-item").length;
-                        const maxIndex = totalCars - 4; // Hiển thị 3 xe mỗi lần
+                        let maxIndex = Math.max(0, carItems.length - 3);
 
                         function updateSlide() {
                             carWrapper.style.transform = `translateX(${-index * carWidth}px)`;
                         }
 
-                        function nextSlide() {
-                            if (index < maxIndex) index++;
-                            updateSlide();
-                        }
-
-                        function prevSlide() {
+                        slider.querySelector(".arrow:first-of-type").addEventListener("click", function() {
                             if (index > 0) index--;
                             updateSlide();
-                        }
-                    </script>
+                        });
+
+                        slider.querySelector(".arrow:last-of-type").addEventListener("click", function() {
+                            if (index < maxIndex) index++;
+                            updateSlide();
+                        });
+                    });
+                </script>
             <?php endforeach; ?>
 
         </div>
@@ -133,7 +135,43 @@ foreach ($types as $type) {
         });
     </script>
     </div>
-    
+    <!-- Modal Bootstrap -->
+    <div class="modal fade" id="carDetailModal" tabindex="-1" aria-labelledby="carDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="carDetailModalLabel">Chi tiết xe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="carDetailContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("type_filter").addEventListener("change", function () {
+                let selectedType = this.value.toLowerCase();
+                document.querySelectorAll(".car-section, .brand_title").forEach(section => {
+                    section.style.display = (selectedType === "all" || section.getAttribute("data-type").toLowerCase() === selectedType) ? "flex" : "none";
+                });
+            });
+
+            document.querySelectorAll(".car-item").forEach(item => {
+                item.addEventListener("click", function () {
+                    let carName = this.getAttribute("data-name");
+                    fetch(`get_car_details.php?name=${encodeURIComponent(carName)}`)
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById("carDetailContent").innerHTML = data;
+                            new bootstrap.Modal(document.getElementById("carDetailModal")).show();
+                        });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 <?php

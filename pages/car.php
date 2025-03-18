@@ -83,26 +83,28 @@ foreach ($types as $type) {
                     <span class="arrow" onclick="nextSlide()">&#9655;</span>
                 </div>
                 <script>
+                    document.querySelectorAll(".slider").forEach(slider => {
+                        let carWrapper = slider.querySelector(".car-wrapper"); // Lấy danh sách xe của slider đó
+                        let carItems = slider.querySelectorAll(".car-item"); // Danh sách xe
+                        let carWidth = 260; // 250px + margin
                         let index = 0;
-                        const carWrapper = document.getElementById("car-wrapper");
-                        const carWidth = 260; // 250px + margin
-                        const totalCars = document.querySelectorAll(".car-item").length;
-                        const maxIndex = totalCars - 4; // Hiển thị 3 xe mỗi lần
+                        let maxIndex = Math.max(0, carItems.length - 3);
 
                         function updateSlide() {
                             carWrapper.style.transform = `translateX(${-index * carWidth}px)`;
                         }
 
-                        function nextSlide() {
-                            if (index < maxIndex) index++;
-                            updateSlide();
-                        }
-
-                        function prevSlide() {
+                        slider.querySelector(".arrow:first-of-type").addEventListener("click", function() {
                             if (index > 0) index--;
                             updateSlide();
-                        }
-                    </script>
+                        });
+
+                        slider.querySelector(".arrow:last-of-type").addEventListener("click", function() {
+                            if (index < maxIndex) index++;
+                            updateSlide();
+                        });
+                    });
+                </script>
                 <?php endforeach; ?>
         </div>
     </div>
@@ -127,7 +129,7 @@ foreach ($types as $type) {
             document.getElementById("type_filter").addEventListener("change", function () {
                 let selectedType = this.value.toLowerCase();
                 document.querySelectorAll(".car-section, .brand_title").forEach(section => {
-                    section.style.display = (selectedType === "all" || section.getAttribute("data-type").toLowerCase() === selectedType) ? "block" : "none";
+                    section.style.display = (selectedType === "all" || section.getAttribute("data-type").toLowerCase() === selectedType) ? "flex" : "none";
                 });
             });
 
