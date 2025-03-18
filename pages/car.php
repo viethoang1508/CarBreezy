@@ -129,7 +129,7 @@ foreach ($types as $type) {
             document.getElementById("type_filter").addEventListener("change", function () {
                 let selectedType = this.value.toLowerCase();
                 document.querySelectorAll(".car-section, .brand_title").forEach(section => {
-                    section.style.display = (selectedType === "all" || section.getAttribute("data-type").toLowerCase() === selectedType) ? "block" : "none";
+                    section.style.display = (selectedType === "all" || section.getAttribute("data-type").toLowerCase() === selectedType) ? "flex" : "none";
                 });
             });
 

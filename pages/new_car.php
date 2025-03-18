@@ -69,7 +69,7 @@ foreach ($types as $type) {
                     <div class="car-list">
                         <div class="car-wrapper">
                             <?php foreach ($list as $car): ?>
-                                <div class="car-item">
+                                <div class="car-item" data-name="<?= htmlspecialchars($car['car_name']) ?>">
                                     <p><strong><?= $car['status'] ?></strong> | <strong><?= $car['type'] ?></strong></p>
                                     <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= htmlspecialchars($car['car_name']) ?>">
                                     <h3><?= htmlspecialchars($car['car_name']) ?></h3>
@@ -110,18 +110,64 @@ foreach ($types as $type) {
 
     <script>
         document.getElementById("type_filter").addEventListener("change", function () {
-            let selectedType = this.value.toLowerCase();
-            let carSections = document.querySelectorAll(".car-section");
-            let titles = document.querySelectorAll(".brand_title");
+    let selectedType = this.value.toLowerCase();
+    let carSections = document.querySelectorAll(".car-section");
+    let titles = document.querySelectorAll(".brand_title");
 
-            carSections.forEach(section => {
-                let type = section.getAttribute("data-type").toLowerCase();
-                section.style.display = (selectedType === "all" || type === selectedType) ? "flex" : "none";
+    carSections.forEach(section => {
+        let type = section.getAttribute("data-type").toLowerCase();
+        if (selectedType === "all" || type === selectedType) {
+            section.style.display = "flex"; 
+            section.style.flexDirection = "row"; // Đảm bảo hiển thị ngang
+            section.style.alignItems = "center"; // Căn giữa
+        } else {
+            section.style.display = "none";
+        }
+    });
+
+    titles.forEach(title => {
+        let type = title.getAttribute("data-type").toLowerCase();
+        title.style.display = (selectedType === "all" || type === selectedType) ? "flex" : "none";
+    });
+});
+
+    </script>
+    
+
+    <!-- Modal Bootstrap -->
+    <div class="modal fade" id="carDetailModal" tabindex="-1" aria-labelledby="carDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="carDetailModalLabel">Chi tiết xe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="carDetailContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("type_filter").addEventListener("change", function () {
+                let selectedType = this.value.toLowerCase();
+                document.querySelectorAll(".car-section, .brand_title").forEach(section => {
+                    section.style.display = (selectedType === "all" || section.getAttribute("data-type").toLowerCase() === selectedType) ? "flex" : "none";
+                });
             });
 
-            titles.forEach(title => {
-                let type = title.getAttribute("data-type").toLowerCase();
-                title.style.display = (selectedType === "all" || type === selectedType) ? "flex" : "none";
+            document.querySelectorAll(".car-item").forEach(item => {
+                item.addEventListener("click", function () {
+                    let carName = this.getAttribute("data-name");
+                    fetch(`get_car_details.php?name=${encodeURIComponent(carName)}`)
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById("carDetailContent").innerHTML = data;
+                            new bootstrap.Modal(document.getElementById("carDetailModal")).show();
+                        });
+                });
             });
         });
     </script>
