@@ -117,6 +117,31 @@
         margin-bottom: 20px;
     }
 }
+/* Scrolling ticker styles */
+#scrolling-ticker {
+    background-color: #000;
+    color: #fff;
+    padding: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+#scrolling-ticker span {
+    display: inline-block;
+    padding-right: 100%;
+    animation: scroll 20s linear infinite;
+}
+
+@keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
 </style>
 </head>
 <body>
@@ -147,5 +172,57 @@
         </div>
 
     </div>
+    <!-- Scrolling Ticker -->
+<div id="scrolling-ticker"><span id="ticker-text">Loading location, date, and time...</span></div>
+<script>
+    function updateTicker(location) {
+        const now = new Date();
+        const dateTimeString = now.toLocaleString();
+        document.getElementById('ticker-text').innerText = `📅 ${dateTimeString} | 📍 ${location}`;
+    }
+
+    function showError(error) {
+        let errorMessage = "Unable to retrieve location.";
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                errorMessage = "User denied the request for Geolocation.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                errorMessage = "Location information is unavailable.";
+                break;
+            case error.TIMEOUT:
+                errorMessage = "The request to get user location timed out.";
+                break;
+        }
+        updateTicker(errorMessage);
+    }
+
+    function fetchLocationAndUpdate() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+
+                fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const location = data.address.city || data.address.town || data.address.village || 'Unknown location';
+                        updateTicker(location);
+                    })
+                    .catch(() => updateTicker("Location not found."));
+            }, showError);
+        } else {
+            updateTicker("Geolocation is not supported by this browser.");
+        }
+    }
+
+    fetchLocationAndUpdate();
+
+    setInterval(() => {
+        fetchLocationAndUpdate();
+    }, 60000); // Cập nhật lại vị trí mỗi 1 phút
+</script>
+
+
 </body>
 </html>

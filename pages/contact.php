@@ -18,7 +18,8 @@
             <img style="" src="../assets/images/contact_banner_01.jpg" alt="">
             <h1>CONTACT US</h1>
         </div>
-    <div class="container">
+    
+        <div class="container">
         <h1 class="information">
             INFORMATION
         </h1>
@@ -58,6 +59,27 @@
                 </div>
             </div>
         </div>
+</div>
+<div class="background-consult-form">
+    <div class="consult-form">
+    <h2>BOOK FOR CONSULTING</h2>
+    <form id="consultForm">
+        <div class="double-row">
+            <input type="text" name="first_name" placeholder="First Name" required>
+            <input type="text" name="last_name" placeholder="Last Name" required>
+        </div>
+        <input type="email" name="email" placeholder="Email" required>
+        <div class="double-row">
+            <input type="text" name="phone" placeholder="Phone" required>
+            <input type="text" name="gender" placeholder="Gender (Nam/Nữ)" required>
+        </div>
+        <input type="text" name="address" placeholder="Address" required>
+        <button type="submit" class="submit-btn">Submit</button>
+    </form>
+    <div id="errorBox" class="error-box" style="display: none;"></div>
+    <div id="responseMessage"></div>
+</div>
+</div>
         <div class="address">
             <div class="address_title">
                 <img src="../assets/images/red_map.svg" alt="">
@@ -76,6 +98,49 @@
             
     </div>
 </body>
+<script>
+    document.getElementById('consultForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const errorBox = document.getElementById('errorBox');
+        const form = this;
+        const formData = new FormData(form);
+        let errors = [];
+
+        const firstName = formData.get('first_name').trim();
+        const lastName = formData.get('last_name').trim();
+        const email = formData.get('email').trim();
+        const phone = formData.get('phone').trim();
+        const gender = formData.get('gender').trim();
+
+        // Validation rules
+        if (!/^[a-zA-ZÀ-ỹ\s]+$/.test(firstName)) errors.push('Invalid surname.');
+        if (!/^[a-zA-ZÀ-ỹ\s]+$/.test(lastName)) errors.push('Invalid name.');
+        if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) errors.push('Invalid email.');
+        if (!/^\d{10}$/.test(phone)) errors.push('Invalid phone.');
+        if (!/^(Nam|Nữ)$/i.test(gender)) errors.push('Invalid gender.');
+
+        if (errors.length > 0) {
+            errorBox.innerHTML = errors.join('<br>');
+            errorBox.style.display = 'block';
+            return;
+        } else {
+            errorBox.style.display = 'none';
+        }
+
+        fetch('../includes/submit_form.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('responseMessage').innerText = 'successfully!';
+            document.getElementById('consultForm').reset();
+        })
+        .catch(error => {
+            document.getElementById('responseMessage').innerText = 'Error. Try again!';
+        });
+    });
+</script>
 </html>
 <?php 
     require('../includes/footer.php');

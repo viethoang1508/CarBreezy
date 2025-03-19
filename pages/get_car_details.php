@@ -1,6 +1,27 @@
 <?php
 require '../includes/connect.php';
+?>
+<!-- code css liên hệ  -->
+<style>
+    .contact-button {
+        padding: 10px 30px;
+        background-color:rgb(214, 14, 14); /* Màu đỏ đậm */
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s;
+        border: 2px solid transparent;
+    }
 
+    .contact-button:hover {
+        background-color: white;
+        color:rgb(216, 27, 27);
+        border-color:rgb(216, 27, 27);
+        transform: scale(1.05);
+    }
+</style>
+<?php
 if (isset($_GET['name'])) {
     $car_name = $mysqli->real_escape_string($_GET['name']);
 
@@ -42,6 +63,9 @@ if (isset($_GET['name'])) {
             <tr><th>Interior</th><td><?= nl2br(htmlspecialchars($car['interior'])) ?></td></tr>
             <tr><th>Exterior</th><td><?= nl2br(htmlspecialchars($car['exterior'])) ?></td></tr>
         </table>
+        <div class="text-center mt-3">
+    <a href="../pages/contact.php" class="contact-button">LIÊN HỆ</a>
+      </div>
         <?php
     } else {
         echo "<p class='text-danger'>Không tìm thấy thông tin xe.</p>";
