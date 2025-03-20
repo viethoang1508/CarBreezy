@@ -60,21 +60,31 @@ $result = $mysqli->query($query);
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("type_filter").addEventListener("change", function () {
-                let selectedType = this.value.toLowerCase();
-                document.querySelectorAll(".car-section, .brand_title").forEach(section => {
-                    section.style.display = (selectedType === "all" || section.getAttribute("data-type").toLowerCase() === selectedType) ? "flex" : "none";
-                });
-            });
-
+            // Kiểm tra xem sale_card có tồn tại không
             document.querySelectorAll(".sale_card").forEach(item => {
                 item.addEventListener("click", function () {
                     let carName = this.getAttribute("data-name");
+                    console.log("Car clicked:", carName); // Debug xem giá trị có đúng không
+
+                    if (!carName) {
+                        alert("Không tìm thấy tên xe.");
+                        return;
+                    }
+
                     fetch(`get_car_details.php?name=${encodeURIComponent(carName)}`)
-                        .then(response => response.text())
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Lỗi khi tải chi tiết xe.");
+                            }
+                            return response.text();
+                        })
                         .then(data => {
                             document.getElementById("carDetailContent").innerHTML = data;
                             new bootstrap.Modal(document.getElementById("carDetailModal")).show();
+                        })
+                        .catch(error => {
+                            console.error("Lỗi:", error);
+                            alert("Không thể tải chi tiết xe.");
                         });
                 });
             });
