@@ -126,7 +126,7 @@ $mysqli->close(); // Đóng kết nối
             <div class="car-container">
                 <div class="car-wrapper" id="car-wrapper">
                     <?php foreach ($cars as $car) : ?>
-                        <div class="car">
+                        <div class="car"  data-name="<?= htmlspecialchars($car['car_name'], ENT_QUOTES, 'UTF-8') ?>">
                             <p><strong><?= $car['status'] ?></strong> | <strong><?= $car['type'] ?></strong></p>
                             <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['car_name'] ?>">
                             <h3><?= $car['car_name'] ?></h3>
@@ -156,6 +156,36 @@ $mysqli->close(); // Đóng kết nối
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Modal Bootstrap -->
+    <div class="modal fade" id="carDetailModal" tabindex="-1" aria-labelledby="carDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="carDetailModalLabel">Car Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="carDetailContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".car").forEach(item => {
+                item.addEventListener("click", function () {
+                    let carName = this.getAttribute("data-name");
+                    fetch(`../pages/get_car_details.php?name=${encodeURIComponent(carName)}`)
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById("carDetailContent").innerHTML = data;
+                            new bootstrap.Modal(document.getElementById("carDetailModal")).show();
+                        });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 <?php require('../includes/footer.php'); ?>
