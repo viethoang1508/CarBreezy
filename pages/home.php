@@ -2,9 +2,21 @@
     require ('../includes/connect.php');
 
     // Lấy danh sách xe từ database
-    $query = "SELECT brands.name AS brand_name, products.name AS car_name, products.price, products.type, products.status, products.image 
-    FROM products 
-    JOIN brands ON products.brand_id = brands.id";
+    $query = "SELECT brands.name AS brand_name, 
+                     products.id AS product_id, 
+                     products.name AS car_name, 
+                     products.price, 
+                     products.type, 
+                     products.status, 
+                     products.image, 
+                     products.created_at,
+                     COALESCE((products.price * (1 - product_offer.discount / 100)), NULL) AS discounted_price
+              FROM products
+              JOIN brands ON products.brand_id = brands.id
+              LEFT JOIN product_offer 
+              ON products.id = product_offer.product_id 
+              AND product_offer.valid_until >= CURDATE() -- Chỉ lấy khuyến mãi còn hạn
+              ORDER BY created_at DESC";
     $result = $mysqli->query($query);
 
     $cars = [];
@@ -90,10 +102,21 @@
             <?php foreach ($cars as $car) : ?>
                 <div class="car car-item">
                     <p><strong><?= $car['status'] ?></strong> | <strong><?= $car['type'] ?></strong></p>
-                    <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['car_name'] ?>">
-                    <h3><?= $car['car_name'] ?></h3>
-                    <p><strong>Hãng:</strong> <span class="car_brand_name"><?= $car['brand_name'] ?></span></p>
-                    <p class="price"><?= number_format($car['price'], 0, ',', '.') ?> VNĐ</p>
+                    <div>
+                        <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['car_name'] ?>">
+                        <h3><?= $car['car_name'] ?></h3>
+                        <p><strong>Hãng:</strong> <span class="car_brand_name"><?= $car['brand_name'] ?></span></p>
+                    </div>
+                    <div class="price-section">
+                        <?php if (!empty($car['discounted_price'])): ?>
+                            <div class="price_group">
+                                <p class="og_price" style="text-decoration: line-through; color: gray;"><?= number_format($car['price'], 0, ',', '.') ?> VNĐ</p>
+                                <p class="price"><?= number_format($car['discounted_price'], 0, ',', '.') ?> VNĐ</p>
+                            </div>
+                        <?php else: ?>
+                            <p class="price"><?= number_format($car['price'], 0, ',', '.') ?> VNĐ</p>
+                        <?php endif; ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -121,8 +144,7 @@
     const carWrapper = document.getElementById("car-wrapper");
     const carWidth = 260;
     const totalCars = document.querySelectorAll(".car").length;
-    const maxIndex = totalCars - 3;
-
+    const maxIndex = Math.max(0, totalCars - 3);
     function updateSlide() {
         carWrapper.style.transform = `translateX(${-index * carWidth}px)`;
     }

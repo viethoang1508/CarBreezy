@@ -20,11 +20,22 @@ $types = ['Hatchback', 'Sedan', 'SUV', 'Convertible'];
 $cars = [];
 
 foreach ($types as $type) {
-    $query = "SELECT brands.name AS brand_name, products.name AS car_name, products.price, products.type, products.status, products.image, products.created_at 
-                FROM products 
-                join brands on products.brand_id = brands.id
-                WHERE type = '$type' and status = 'Xe Cũ'
-                ORDER BY created_at DESC";
+    $query = "SELECT brands.name AS brand_name, 
+                     products.id AS product_id, 
+                     products.name AS car_name, 
+                     products.price, 
+                     products.type, 
+                     products.status, 
+                     products.image, 
+                     products.created_at,
+                     COALESCE((products.price * (1 - product_offer.discount / 100)), NULL) AS discounted_price
+              FROM products
+              JOIN brands ON products.brand_id = brands.id
+              LEFT JOIN product_offer 
+              ON products.id = product_offer.product_id 
+              AND product_offer.valid_until >= CURDATE() -- Chỉ lấy khuyến mãi còn hạn
+              WHERE type = '$type' and status = 'Xe Cũ'
+              ORDER BY created_at DESC";
     $result = $mysqli->query($query);
     
     if ($result) {
@@ -72,11 +83,22 @@ foreach ($types as $type) {
                             <?php foreach ($list as $car): ?>
                                 <div class="car-item" data-name="<?= htmlspecialchars($car['car_name']) ?>">
                                     <p><strong><?= $car['status'] ?></strong> | <strong><?= $car['type'] ?></strong></p>
-                                    <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['car_name'] ?>">
-                                    <h3><?= $car['car_name'] ?></h3>
-                                    <p><strong>Hãng:</strong> <span class="car_brand_name"><?= $car['brand_name'] ?></span></p>
-                                    <p class="price"><?= number_format($car['price'], 0, ',', '.') ?> VNĐ</p>
-                                </div>
+                                    <div>
+                                        <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['car_name'] ?>">
+                                        <h3><?= $car['car_name'] ?></h3>
+                                        <p><strong>Hãng:</strong> <span class="car_brand_name"><?= $car['brand_name'] ?></span></p>
+                                    </div>
+                                    <div class="price-section">
+                                        <?php if (!empty($car['discounted_price'])): ?>
+                                            <p class="price_group">
+                                                <p class="og_price" style="text-decoration: line-through; color: gray;"><?= number_format($car['price'], 0, ',', '.') ?> VNĐ</p>
+                                                <p class="price"><?= number_format($car['discounted_price'], 0, ',', '.') ?> VNĐ</p>
+                                            </p>
+                                        <?php else: ?>
+                                            <p class="price"><?= number_format($car['price'], 0, ',', '.') ?> VNĐ</p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>   
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -140,7 +162,7 @@ foreach ($types as $type) {
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="carDetailModalLabel">Chi tiết xe</h5>
+                    <h5 class="modal-title" id="carDetailModalLabel">Car Detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

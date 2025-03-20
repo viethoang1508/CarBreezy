@@ -24,7 +24,7 @@ $result = $mysqli->query($query);
         <h1>SALE</h1>
         <div class="sale_container">
             <?php while ($row = $result->fetch_assoc()): ?>
-                <div class="sale_card">
+                <div class="sale_card" data-name="<?= htmlspecialchars($row['car_name'] ?? '') ?>">
                     <div class="car">
                         <p><strong><?= $row['status'] ?></strong> | <strong><?= $row['type'] ?></strong></p>
                         <img src="../assets/images/car_picture/<?= $row['image'] ?>" alt="<?= $row['car_name'] ?>">
@@ -43,6 +43,43 @@ $result = $mysqli->query($query);
             <?php endwhile; ?>
         </div>
     </div>
+    <!-- Modal Bootstrap -->
+    <div class="modal fade" id="carDetailModal" tabindex="-1" aria-labelledby="carDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="carDetailModalLabel">Car Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="carDetailContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("type_filter").addEventListener("change", function () {
+                let selectedType = this.value.toLowerCase();
+                document.querySelectorAll(".car-section, .brand_title").forEach(section => {
+                    section.style.display = (selectedType === "all" || section.getAttribute("data-type").toLowerCase() === selectedType) ? "flex" : "none";
+                });
+            });
+
+            document.querySelectorAll(".sale_card").forEach(item => {
+                item.addEventListener("click", function () {
+                    let carName = this.getAttribute("data-name");
+                    fetch(`get_car_details.php?name=${encodeURIComponent(carName)}`)
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById("carDetailContent").innerHTML = data;
+                            new bootstrap.Modal(document.getElementById("carDetailModal")).show();
+                        });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 <?php require '../includes/footer.php'; ?>
