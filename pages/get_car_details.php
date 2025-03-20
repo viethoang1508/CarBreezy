@@ -27,10 +27,14 @@ if (isset($_GET['name'])) {
 
     $query = "SELECT brands.name AS brand_name, products.*, product_detail.engine, 
                      product_detail.horsepower, product_detail.fuel_type, product_detail.dimensions, 
-                     product_detail.weight, product_detail.interior, product_detail.exterior 
+                     product_detail.weight, product_detail.interior, product_detail.exterior,
+                     COALESCE((products.price * (1 - product_offer.discount / 100)), products.price) AS discounted_price,
+                     product_offer.discount
               FROM products 
               JOIN brands ON products.brand_id = brands.id 
               LEFT JOIN product_detail ON products.id = product_detail.product_id
+              LEFT JOIN product_offer ON products.id = product_offer.product_id 
+              AND product_offer.valid_until >= CURDATE()
               WHERE products.name = '$car_name' 
               LIMIT 1";
 
@@ -48,7 +52,19 @@ if (isset($_GET['name'])) {
         <table class="table table-bordered">
             <tr><th>Brand</th><td><?= htmlspecialchars($car['brand_name']) ?></td></tr>
             <tr><th>Type</th><td><?= htmlspecialchars($car['type']) ?></td></tr>
-            <tr><th>Price</th><td><?= number_format($car['price'], 0, ',', '.') ?> VND</td></tr>
+            <tr><th>Price</th>
+                <td>
+                    <?php if (!empty($car['discount']) && $car['discount'] > 0): ?>
+                        <del style="color: gray;"><?= number_format($car['price'], 0, ',', '.') ?> VND</del>
+                        <br>
+                        <strong style="color: red;"><?= number_format($car['discounted_price'], 0, ',', '.') ?> VND</strong>
+                        <br>
+                        <small>(Discount: <?= $car['discount'] ?>%)</small>
+                    <?php else: ?>
+                        <?= number_format($car['price'], 0, ',', '.') ?> VND
+                    <?php endif; ?>
+                </td>
+            </tr>
             <tr><th>Status</th><td><?= htmlspecialchars($car['status']) ?></td></tr>
             <tr><th>Added On</th><td><?= date("d/m/Y", strtotime($car['created_at'])) ?></td></tr>
         </table>
