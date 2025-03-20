@@ -223,6 +223,7 @@ span {
 .car:hover{
     transform: scale(1.1);
     box-shadow: 5px 5px 10px lightgray;
+    cursor: pointer;
 }
 .car h3 {
     font-family: 'Oswald', sans-serif;

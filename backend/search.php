@@ -82,6 +82,11 @@ $mysqli->close(); // Đóng kết nối
             align-items: center;
             justify-items: center;
         }
+        .car:hover {
+            transform: scale(1.1);
+            box-shadow: 5px 5px 10px lightgray;
+            cursor: pointer;
+        }
         .car h3 {
             font-family: 'Oswald', sans-serif;
             color: #D81324;
@@ -147,7 +152,7 @@ $mysqli->close(); // Đóng kết nối
                     <?php endforeach; ?>
                 </div>
         <?php else: ?>
-            <p class="text-center text-warning">Không tìm thấy kết quả nào.</p>
+            <p class="text-center text-warning">Cannot find any results.</p>
         <?php endif; ?>
     </div>
     <!-- Bootstrap JS -->
