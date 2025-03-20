@@ -80,11 +80,11 @@ if (isset($_GET['name'])) {
             <tr><th>Exterior</th><td><?= nl2br(htmlspecialchars($car['exterior'])) ?></td></tr>
         </table>
         <div class="text-center mt-3">
-    <a href="../pages/contact.php" class="contact-button">LIÊN HỆ</a>
+    <a href="../pages/contact.php" class="contact-button">CONTACT</a>
       </div>
         <?php
     } else {
-        echo "<p class='text-danger'>Không tìm thấy thông tin xe.</p>";
+        echo "<p class='text-danger'>Cannot find information.</p>";
     }
 }
 ?>
