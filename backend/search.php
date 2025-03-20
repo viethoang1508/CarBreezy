@@ -84,7 +84,6 @@ $mysqli->close(); // Đóng kết nối
         }
         .car:hover {
             transform: scale(1.1);
-            box-shadow: 5px 5px 10px lightgray;
             cursor: pointer;
         }
         .car h3 {

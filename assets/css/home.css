@@ -220,9 +220,8 @@ span {
     justify-items: center;
     justify-content: space-between;
 }
-.car:hover{
+.car-item:hover{
     transform: scale(1.1);
-    box-shadow: 5px 5px 10px lightgray;
     cursor: pointer;
 }
 .car h3 {
