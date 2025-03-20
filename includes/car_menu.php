@@ -13,6 +13,7 @@ $result_brands = $mysqli->query($query_brands);
 if (!$result_brands) {
     die("Lỗi truy vấn danh sách hãng: " . $mysqli->error);
 }
+$selected_brand_id = isset($_GET['id']) ? $_GET['id'] : null; // Thêm biến $selected_brand_id trước vòng lặp để lấy id từ URL.
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -110,14 +111,26 @@ if (!$result_brands) {
             width: 100%;
             left: 0;
         }
+
+        /* Khi được chọn, đổi màu nền thành đỏ và chữ trắng */
+        .car_menu ul li a.active {
+            background-color: #d41a2a;
+            color: #fff;
+        }
+
+        .car_menu ul li a:hover {
+            background-color: #d41a2a;
+            color: #fff;
+        }
     </style>
     
 <body>
     <div class="car_menu">
             <a href="car.php"><h4>BRANDS</h4></a>
             <ul>
+                
                 <?php while ($brand = $result_brands->fetch_assoc()): ?>
-                    <li><a href="brand.php?id=<?= $brand['id'] ?>"> <?= $brand['name'] ?> </a></li>
+                    <li><a href="brand.php?id=<?= $brand['id'] ?>" class="<?= ($selected_brand_id == $brand['id']) ? 'active' : '' ?>"> <?= $brand['name'] ?> </a></li>
                 <?php endwhile; ?>
             </ul>
             <a href="new_car.php"><h4>NEW</h4></a>
