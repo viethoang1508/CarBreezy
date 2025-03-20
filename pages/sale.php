@@ -74,7 +74,7 @@ $result = $mysqli->query($query);
                     fetch(`get_car_details.php?name=${encodeURIComponent(carName)}`)
                         .then(response => {
                             if (!response.ok) {
-                                throw new Error("Lỗi khi tải chi tiết xe.");
+                                throw new Error("Error in loading car information.");
                             }
                             return response.text();
                         })
@@ -84,7 +84,7 @@ $result = $mysqli->query($query);
                         })
                         .catch(error => {
                             console.error("Lỗi:", error);
-                            alert("Không thể tải chi tiết xe.");
+                            alert("Error in loading car information.");
                         });
                 });
             });
