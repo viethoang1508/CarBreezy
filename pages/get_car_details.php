@@ -78,12 +78,12 @@ if (isset($_GET['name'])) {
 
         <!-- Nút liên hệ -->
         <div class="text-center mt-3">
-            <a href="../pages/contact.php" class="contact-button">LIÊN HỆ</a>
+            <a href="../pages/contact.php" class="contact-button">CONTACT</a>
         </div>
 
 <?php
     } else {
-        echo "<p class='text-danger'>Không tìm thấy thông tin xe.</p>";
+        echo "<p class='text-danger'>Cannot find information.</p>";
     }
 
     // Đóng statement
