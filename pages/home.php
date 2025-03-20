@@ -144,8 +144,7 @@
     const carWrapper = document.getElementById("car-wrapper");
     const carWidth = 260;
     const totalCars = document.querySelectorAll(".car").length;
-    const maxIndex = totalCars - 3;
-
+    const maxIndex = Math.max(0, totalCars - 3);
     function updateSlide() {
         carWrapper.style.transform = `translateX(${-index * carWidth}px)`;
     }

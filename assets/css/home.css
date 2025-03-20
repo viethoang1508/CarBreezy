@@ -209,16 +209,16 @@ span {
     transition: transform 0.5s ease-in-out; /* Hiệu ứng trượt */
 }
 .car {
-    height: 100%;
     width: 250px;
-    flex-shrink: 0; /* Giữ kích thước cố định */
+    flex-shrink: 0;
     padding: 10px;
     text-align: center;
-    display: flex;
+    display: flex
+;
     flex-direction: column;
     align-items: center;
+    justify-items: center;
     justify-content: space-between;
-    transition: transform 0.3s ease-in-out;
 }
 .car:hover{
     transform: scale(1.1);
