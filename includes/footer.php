@@ -150,10 +150,18 @@
             <div class="col1 col-4">
                 <img src="../assets/images/logo-transparent.png" alt="logo_brand" class="img-fluid logo-img">
                 <div class="logo_links">
-                    <img src="../assets/images/twitter-brands.svg" alt="twitter">
-                    <img src="../assets/images/facebook-brands.svg" alt="facebook">
-                    <img src="../assets/images/youtube-brands.svg" alt="youtube">
-                    <img src="../assets/images/square-instagram-brands.svg" alt="instagram">
+                    <a href="https://x.com/">
+                        <img src="../assets/images/twitter-brands.svg" alt="twitter">
+                    </a>
+                    <a href="https://www.facebook.com/">
+                        <img src="../assets/images/facebook-brands.svg" alt="facebook">
+                    </a>
+                    <a href="https://www.youtube.com/">
+                        <img src="../assets/images/youtube-brands.svg" alt="youtube">
+                    </a>
+                    <a href="https://www.instagram.com/">
+                        <img src="../assets/images/square-instagram-brands.svg" alt="instagram">
+                    </a>
                 </div>
             </div>
             <div class="col-4">
