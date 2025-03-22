@@ -1,6 +1,6 @@
 <?php
-require '../includes/connect.php'; // Kết nối database
-require '../includes/header.php'; // Header
+require '../includes/connect.php';
+require '../includes/header.php';
 
 // Kiểm tra kết nối
 if (!$mysqli) {
@@ -14,6 +14,9 @@ $result_brands = $mysqli->query($query_brands);
 if (!$result_brands) {
     die("Lỗi truy vấn danh sách hãng: " . $mysqli->error);
 }
+
+// Lấy first_car_id từ URL (nếu có)
+$first_car_id = isset($_GET['first_car_id']) ? intval($_GET['first_car_id']) : null;
 
 // Lấy danh sách xe theo từng loại
 $types = ['Hatchback', 'Sedan', 'SUV', 'Convertible'];
@@ -33,7 +36,7 @@ foreach ($types as $type) {
               JOIN brands ON products.brand_id = brands.id
               LEFT JOIN product_offer 
               ON products.id = product_offer.product_id 
-              AND product_offer.valid_until >= CURDATE() -- Chỉ lấy khuyến mãi còn hạn
+              AND product_offer.valid_until >= CURDATE()
               WHERE type = '$type'
               ORDER BY created_at DESC";
     $result = $mysqli->query($query);
@@ -47,6 +50,7 @@ foreach ($types as $type) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,6 +60,24 @@ foreach ($types as $type) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../assets/css/car.css">
     <title>Car</title>
+    <style>
+        .contact-button {
+            padding: 10px 30px;
+            background-color: rgb(214, 14, 14);
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            border: 2px solid transparent;
+        }
+        .contact-button:hover {
+            background-color: white;
+            color: rgb(216, 27, 27);
+            border-color: rgb(216, 27, 27);
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -65,6 +87,11 @@ foreach ($types as $type) {
 
         <div class="content">
             <h2>CARS</h2>
+            <?php if ($first_car_id): ?>
+                <div class="alert alert-info">
+                    You have selected a car to compare. Please choose the second car by clicking on another car below.
+                </div>
+            <?php endif; ?>
             <div class="type_filter">
                 <label for="type_filter">Type Filter</label>
                 <select id="type_filter" class="form-select">
@@ -77,7 +104,7 @@ foreach ($types as $type) {
             <?php foreach ($cars as $type => $list): ?>
                 <h3 class="brand_title" data-type="<?= htmlspecialchars($type) ?>"><?= strtoupper($type) ?></h3>
                 <div class="slider car-section" data-type="<?= htmlspecialchars($type) ?>">
-                <span class="arrow" onclick="prevSlide()">&#9665;</span>
+                    <span class="arrow" onclick="prevSlide()">◁</span>
                     <div class="car-list">
                         <div class="car-wrapper">
                             <?php foreach ($list as $car): ?>
@@ -86,7 +113,7 @@ foreach ($types as $type) {
                                     <div>
                                         <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['car_name'] ?>">
                                         <h3><?= $car['car_name'] ?></h3>
-                                        <p><strong>Hãng:</strong> <span class="car_brand_name"><?= $car['brand_name'] ?></span></p>
+                                        <p><strong>Brand:</strong> <span class="car_brand_name"><?= $car['brand_name'] ?></span></p>
                                     </div>
                                     <div class="price-section">
                                         <?php if (!empty($car['discounted_price'])): ?>
@@ -102,13 +129,13 @@ foreach ($types as $type) {
                             <?php endforeach; ?>
                         </div>
                     </div>
-                    <span class="arrow" onclick="nextSlide()">&#9655;</span>
+                    <span class="arrow" onclick="nextSlide()">▷</span>
                 </div>
                 <script>
                     document.querySelectorAll(".slider").forEach(slider => {
-                        let carWrapper = slider.querySelector(".car-wrapper"); // Lấy danh sách xe của slider đó
-                        let carItems = slider.querySelectorAll(".car-item"); // Danh sách xe
-                        let carWidth = 260; // 250px + margin
+                        let carWrapper = slider.querySelector(".car-wrapper");
+                        let carItems = slider.querySelectorAll(".car-item");
+                        let carWidth = 260;
                         let index = 0;
                         let maxIndex = Math.max(0, carItems.length - 3);
 
@@ -127,7 +154,7 @@ foreach ($types as $type) {
                         });
                     });
                 </script>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
         </div>
     </div>
     
@@ -158,7 +185,12 @@ foreach ($types as $type) {
             document.querySelectorAll(".car-item").forEach(item => {
                 item.addEventListener("click", function () {
                     let carName = this.getAttribute("data-name");
-                    fetch(`get_car_details.php?name=${encodeURIComponent(carName)}`)
+                    // Thêm first_car_id vào URL nếu có
+                    let url = `get_car_details.php?name=${encodeURIComponent(carName)}`;
+                    <?php if ($first_car_id): ?>
+                        url += `&first_car_id=<?= $first_car_id ?>`;
+                    <?php endif; ?>
+                    fetch(url)
                         .then(response => response.text())
                         .then(data => {
                             document.getElementById("carDetailContent").innerHTML = data;
@@ -170,6 +202,4 @@ foreach ($types as $type) {
     </script>
 </body>
 </html>
-<?php
-require('../includes/footer.php');
-?>
+<?php require('../includes/footer.php'); ?>

@@ -105,7 +105,7 @@
                     <div>
                         <img src="../assets/images/car_picture/<?= $car['image'] ?>" alt="<?= $car['car_name'] ?>">
                         <h3><?= $car['car_name'] ?></h3>
-                        <p><strong>Hãng:</strong> <span class="car_brand_name"><?= $car['brand_name'] ?></span></p>
+                        <p><strong>Brand:</strong> <span class="car_brand_name"><?= $car['brand_name'] ?></span></p>
                     </div>
                     <div class="price-section">
                         <?php if (!empty($car['discounted_price'])): ?>
