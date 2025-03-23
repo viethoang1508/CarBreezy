@@ -5,7 +5,7 @@ require '../includes/connect.php';
 <style>
     .contact-button {
         padding: 10px 30px;
-        background-color:rgb(214, 14, 14); /* Màu đỏ đậm */
+        background-color: rgb(214, 14, 14);
         color: white;
         font-weight: bold;
         text-decoration: none;
@@ -16,16 +16,18 @@ require '../includes/connect.php';
 
     .contact-button:hover {
         background-color: white;
-        color:rgb(216, 27, 27);
-        border-color:rgb(216, 27, 27);
+        color: rgb(216, 27, 27);
+        border-color: rgb(216, 27, 27);
         transform: scale(1.05);
     }
 </style>
 <?php
 if (isset($_GET['name'])) {
     $car_name = $mysqli->real_escape_string($_GET['name']);
+    // Lấy first_car_id từ URL (nếu có)
+    $first_car_id = isset($_GET['first_car_id']) ? intval($_GET['first_car_id']) : null;
 
-    $query = "SELECT brands.name AS brand_name, products.*, product_detail.engine, 
+    $query = "SELECT brands.name AS brand_name, products.id, products.*, product_detail.engine, 
                      product_detail.horsepower, product_detail.fuel_type, product_detail.dimensions, 
                      product_detail.weight, product_detail.interior, product_detail.exterior,
                      COALESCE((products.price * (1 - product_offer.discount / 100)), products.price) AS discounted_price,
@@ -80,11 +82,16 @@ if (isset($_GET['name'])) {
             <tr><th>Exterior</th><td><?= nl2br(htmlspecialchars($car['exterior'])) ?></td></tr>
         </table>
         <div class="text-center mt-3">
-    <a href="../pages/contact.php" class="contact-button">LIÊN HỆ</a>
-      </div>
+            <a href="../pages/contact.php" class="contact-button">CONTACT</a>
+            <?php if ($first_car_id && $car['id'] != $first_car_id): ?>
+                <a href="compare.php?id=<?= $first_car_id ?>&second_car_id=<?= $car['id'] ?>" class="contact-button">COMPARE</a>
+            <?php else: ?>
+                <a href="../pages/compare.php?id=<?= $car['id'] ?>" class="contact-button">COMPARE</a>
+            <?php endif; ?>
+        </div>
         <?php
     } else {
-        echo "<p class='text-danger'>Không tìm thấy thông tin xe.</p>";
+        echo "<p class='text-danger'>Cannot find information.</p>";
     }
 }
 ?>
