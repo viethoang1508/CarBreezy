@@ -153,7 +153,7 @@ $mysqli->close(); // Đóng kết nối
         <?php else: ?>
             <p class="text-center text-warning">Cannot find any results.</p>
         <?php endif; ?>
-    </div>
+    </div>  
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Modal Bootstrap -->
