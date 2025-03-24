@@ -99,48 +99,70 @@
     </div>
 </body>
 <script>
-    document.getElementById('consultForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const errorBox = document.getElementById('errorBox');
-        const form = this;
-        const formData = new FormData(form);
-        let errors = [];
+document.getElementById('consultForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const errorBox = document.getElementById('errorBox');
+    const responseMessage = document.getElementById('responseMessage');
+    const form = this;
+    const formData = new FormData(form);
+    let errors = [];
 
-        const firstName = formData.get('first_name').trim();
-        const lastName = formData.get('last_name').trim();
-        const email = formData.get('email').trim();
-        const phone = formData.get('phone').trim();
-        const gender = formData.get('gender').trim();
+    // Xóa thông báo cũ
+    errorBox.innerHTML = '';
+    errorBox.style.display = 'none';
+    responseMessage.innerText = '';
 
-        // Validation rules
-        if (!/^[a-zA-ZÀ-ỹ\s]+$/.test(firstName)) errors.push('Invalid surname.');
-        if (!/^[a-zA-ZÀ-ỹ\s]+$/.test(lastName)) errors.push('Invalid name.');
-        if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) errors.push('Invalid email.');
-        if (!/^\d{10}$/.test(phone)) errors.push('Invalid phone.');
-        if (!/^(Nam|Nữ)$/i.test(gender)) errors.push('Invalid gender.');
+    // Lấy dữ liệu
+    const firstName = formData.get('first_name').trim();
+    const lastName  = formData.get('last_name').trim();
+    const email     = formData.get('email').trim();
+    const phone     = formData.get('phone').trim();
+    const gender    = formData.get('gender').trim();
+    const address   = formData.get('address').trim();
 
-        if (errors.length > 0) {
-            errorBox.innerHTML = errors.join('<br>');
-            errorBox.style.display = 'block';
-            return;
+    // Kiểm tra dữ liệu
+    if (!/^[a-zA-ZÀ-ỹ\s]+$/.test(firstName)) errors.push('Invalid first name.');
+    if (!/^[a-zA-ZÀ-ỹ\s]+$/.test(lastName)) errors.push('Invalid last name.');
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) errors.push('Invalid email.');
+    if (!/^\d{10}$/.test(phone)) errors.push('Phone must be 10 digits.');
+    if (!/^(Nam|Nữ)$/i.test(gender)) errors.push('Gender must be "Nam" or "Nữ".');
+    const addressPattern = /^[a-zA-ZÀ-ỹ0-9\s,._-]{5,}$/;
+    if (address.length < 5 || !addressPattern.test(address)) {
+        errors.push('Address is invalid. Use only letters, numbers, comma, dot, dash, underscore.');
+    }
+
+    // Nếu có lỗi
+    if (errors.length > 0) {
+        errorBox.innerHTML = errors.join('<br>');
+        errorBox.style.display = 'block';
+        return;
+    }
+
+    // Gửi AJAX
+    fetch('../includes/submit_form.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data.trim() === 'success') {
+            responseMessage.innerText = 'Submitted successfully!';
+            form.reset();
         } else {
-            errorBox.style.display = 'none';
+            responseMessage.innerText = data; // In lỗi chi tiết từ PHP nếu có
         }
-
-        fetch('../includes/submit_form.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('responseMessage').innerText = 'successfully!';
-            document.getElementById('consultForm').reset();
-        })
-        .catch(error => {
-            document.getElementById('responseMessage').innerText = 'Error. Try again!';
-        });
+    })
+    .catch(error => {
+        responseMessage.innerText = 'Error sending data. Try again.';
+        console.error('AJAX Error:', error);
     });
+});
 </script>
+
+
+
+
+
 </html>
 <?php 
     require('../includes/footer.php');
